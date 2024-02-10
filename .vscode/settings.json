@@ -1,6 +1,7 @@
 {
-    "C_Cpp.default.compileCommands": "/Users/elsa/Projects/dook/builddir/compile_commands.json",
+    "C_Cpp.default.compileCommands": "/Users/elsa/Projects/dook/build/compile_commands.json",
     "files.associations": {
         "optional": "cpp"
-    }
+    },
+    "mesonbuild.buildFolder": "build"
 }
