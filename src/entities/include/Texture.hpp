@@ -13,8 +13,9 @@ namespace dook
         std::optional<Rect> animationStep;
 
     public:
-        Texture(std::string fileName) : fileName(fileName){};
+        Texture(std::string fileName) : fileName(fileName) {}
+        Texture() = delete;
         virtual void animate() = 0;
         virtual ~Texture() = 0;
-    }
-}
+    };
+};
