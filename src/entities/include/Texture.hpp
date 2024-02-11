@@ -28,7 +28,7 @@ namespace dook
          * @return true If the draw rectangle touches the end of the texture.
          * @return false otherwise.
          */
-        bool is_draw_rect_last();
+        bool is_animation_completed();
 
     protected:
         /**

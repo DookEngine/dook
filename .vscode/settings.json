@@ -55,7 +55,8 @@
         "typeinfo": "cpp",
         "unordered_map": "cpp",
         "algorithm": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "__tree": "cpp"
     },
     "mesonbuild.buildFolder": "build"
 }

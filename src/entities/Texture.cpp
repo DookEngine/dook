@@ -1,7 +1,7 @@
 #include <Texture.hpp>
 
 template <class T>
-bool dook::Texture<T>::is_draw_rect_last()
+bool dook::Texture<T>::is_animation_completed()
 {
     if (!this->draw_rectangle())
     {
