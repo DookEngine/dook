@@ -1,4 +1,6 @@
 #pragma once
+#include <functional>
+#include <memory>
 #include <string>
 namespace dook
 {
@@ -6,14 +8,16 @@ namespace dook
     class Audio
     {
     private:
-        S _raw_audio;
+        std::shared_ptr<S> _raw_audio;
         std::string _file_name;
 
     protected:
         /**
          * @brief Load the audio file to memory.
+         *
+         * @param loader: Function to call with the filename to load the string.
          */
-        virtual void load_audio() = 0;
+        virtual void load_audio(std::function<std::shared_ptr<S>(std::string)> loader) = 0;
 
     public:
         /**

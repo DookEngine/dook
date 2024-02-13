@@ -12,7 +12,7 @@ namespace dook
     class Command : public Entity
     {
     private:
-        const State &_to;
+        State _to;
 
     public:
         Command(

@@ -19,7 +19,7 @@ namespace dook
          */
         std::optional<Rect> _animation_step;
 
-        T _raw_texture;
+        std::shared_ptr<T> _raw_texture;
 
         /**
          * @brief Check if animation step is the last one.
@@ -39,10 +39,11 @@ namespace dook
         /**
          * @brief Initialise a texture from the file.
          *
+         * @param loader Function to call to load a texture.
          * @return true on success.
          * @return false on failure.
          */
-        virtual bool load_texture() const = 0;
+        virtual bool load_texture(std::function<std::shared_ptr<T>(std::string)> loader) const = 0;
 
     public:
         Texture(std::string file_name) : file_name(file_name)
