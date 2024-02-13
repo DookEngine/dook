@@ -1,5 +1,5 @@
 {
-    "C_Cpp.default.compileCommands": "/Users/elsa/Projects/dook/build/compile_commands.json",
+    "C_Cpp.default.compileCommands": "build/compile_commands.json",
     "files.associations": {
         "optional": "cpp",
         "string": "cpp",
@@ -56,7 +56,16 @@
         "unordered_map": "cpp",
         "algorithm": "cpp",
         "map": "cpp",
-        "__tree": "cpp"
+        "__tree": "cpp",
+        "__bits": "cpp",
+        "__tuple": "cpp",
+        "bit": "cpp",
+        "memory": "cpp",
+        "__nullptr": "cpp",
+        "__string": "cpp",
+        "chrono": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp"
     },
     "mesonbuild.buildFolder": "build"
 }
