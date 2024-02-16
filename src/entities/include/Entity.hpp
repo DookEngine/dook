@@ -41,6 +41,6 @@ namespace dook
         }
         Entity(std::string name, EntityType type) : Entity(name, type, {"", 0}) {}
         Entity() = delete;
-        virtual ~Entity() = 0;
+        virtual ~Entity() = default;
     };
 };

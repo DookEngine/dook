@@ -70,6 +70,6 @@ namespace dook
          */
         const std::optional<Rect> &draw_rectangle() const { return draw_rectangle; };
 
-        virtual ~Texture() = 0;
+        virtual ~Texture() = default;
     };
 };
