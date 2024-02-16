@@ -5,6 +5,7 @@
 #include <EntityType.hpp>
 #include <State.hpp>
 #include <CharacterStates.hpp>
+#include <Position.hpp>
 
 namespace dook
 {
@@ -39,12 +40,14 @@ namespace dook
         Character(std::string name,
                   CharacterStats stats,
                   CharacterStates states,
+                  Position position,
                   SourceInfo source)
             : Object<T, S>(name,
                            states.idle,
                            states.dead,
                            stats,
                            EntityType::CHARACTER,
+                           position,
                            source),
               _stats(stats),
               _states(states){};
@@ -57,20 +60,24 @@ namespace dook
          * @param terminal_state When reached, the character is deemed
          * removable.
          * @param stats Stats for character.
+         * @param position Position of the character.
          */
         Character(
             std::string name,
             CharacterStats stats,
-            CharacterStates states)
+            CharacterStates states,
+            Position position)
             : Character(name,
                         stats,
                         states,
+                        position,
                         {"", 0}) {}
 
         /** Get a readonly reference to the stats object. */
         const CharacterStats &stats() const { return _stats; }
         const CharacterStates &states() const { return _states; }
         void tick() override;
+
         /**
          * @brief Hurt a character by applying damage.
          *

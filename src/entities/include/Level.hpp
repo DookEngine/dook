@@ -4,6 +4,9 @@
 #include <string>
 #include <Texture.hpp>
 #include <Entity.hpp>
+#include <Character.hpp>
+#include <Object.hpp>
+
 namespace dook
 {
     /**
@@ -16,9 +19,12 @@ namespace dook
     class Level : public Entity
     {
     private:
-        std::unique_ptr<Texture<T>> background;
-        std::unique_ptr<Texture<T>> foreground;
-        std::unique_ptr<Texture<T>> passability;
+        const std::unique_ptr<Texture<T>> background;
+        const std::unique_ptr<Texture<T>> foreground;
+        const std::unique_ptr<Texture<T>> passability;
+        std::shared_ptr<Character<T, S>> _main_character;
+        std::vector<std::shared_ptr<Character<T, S>>> characters;
+        std::vector<std::shared_ptr<Object<T, S>>> objects;
 
     public:
         /**
@@ -35,14 +41,16 @@ namespace dook
          */
         Level(
             std::string name,
-            std::unqiue_ptr<Texture<T>> background,
-            std::unqiue_ptr<Texture<T>> foreground,
-            std::unqiue_ptr<Texture<T>> passability,
+            std::unique_ptr<Texture<T>> background,
+            std::unique_ptr<Texture<T>> foreground,
+            std::unique_ptr<Texture<T>> passability,
             SourceInfo source)
             : Entity(name, EntityType::LEVEL, source),
-              background(background),
-              foreground(foreground),
-              passability(passability) {}
+              background(std::move(background)),
+              foreground(std::move(foreground)),
+              passability(std::move(passability))
+        {
+        }
         /**
          * @brief Construct a new Level object
          *
@@ -56,10 +64,32 @@ namespace dook
          */
         Level(
             std::string name,
-            std::unqiue_ptr<Texture<T>> background,
-            std::unqiue_ptr<Texture<T>> foreground,
-            std::unqiue_ptr<Texture<T>> passability)
-            : Level(name, background, foreground, passability);
+            std::unique_ptr<Texture<T>> background,
+            std::unique_ptr<Texture<T>> foreground,
+            std::unique_ptr<Texture<T>> passability)
+            : Level(name,
+                    std::move(background),
+                    std::move(foreground),
+                    std::move(passability),
+                    {"", 0}) {}
         ~Level() = default;
+
+        /**
+         * @brief Include a character in this level.
+         *
+         * @param character
+         */
+        void register_character(std::shared_ptr<Character<T, S>> character);
+
+        /**
+         * @brief Get the main character.
+         *
+         * Character with ID 0 is the main character.
+         *
+         * @return std::shared_ptr<Character> The main character.
+         */
+        std::shared_ptr<Character<T, S>> main_character();
+
+        void tick();
     };
 };
