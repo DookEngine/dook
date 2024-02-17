@@ -1,7 +1,6 @@
 #include <Texture.hpp>
 
-template <class T>
-bool dook::Texture<T>::is_animation_completed()
+bool dook::Texture::is_animation_completed() const
 {
     if (!this->draw_rectangle())
     {
@@ -16,12 +15,11 @@ bool dook::Texture<T>::is_animation_completed()
     return is_touching_the_end_x && is_touching_the_end_y;
 }
 
-template <class T>
-void dook::Texture<T>::reset()
+void dook::Texture::reset()
 {
     if (this->_draw_rectangle.has_value())
     {
-        this->_draw_rectangle.emplace({
+        this->_draw_rectangle.emplace(dook::Rect{
             0,
             0,
             this->_draw_rectangle.value().w,
@@ -30,13 +28,12 @@ void dook::Texture<T>::reset()
     }
 }
 
-template <class T>
-void dook::Texture<T>::animate()
+void dook::Texture::animate()
 {
     if (this->_animation_step.has_value() && this->_draw_rectangle.has_value())
     {
         auto step = this->_animation_step.value();
-        if (this->is_draw_rect_last())
+        if (this->is_animation_completed())
         {
             // Reset the draw_rect to original position.
             this->reset();

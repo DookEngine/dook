@@ -1,10 +1,9 @@
 #include <Character.hpp>
 
-template <class T, class S>
-void dook::Character<T, S>::tick()
+void dook::Character::tick()
 {
     // Tick as an object first.
-    Object<T, S>::tick();
+    Object::tick();
     // Then...
     // Heal if appliable.
     if (this->ticks_since_last_damage >= 10 && this->stats().health < this->stats().max_health)
@@ -16,8 +15,7 @@ void dook::Character<T, S>::tick()
     this->ticks_since_last_damage++;
 }
 
-template <class T, class S>
-void dook::Character<T, S>::hurt(float damage)
+void dook::Character::hurt(float damage)
 {
     const auto next_health = this->stats().health - damage;
     if (next_health <= 0)

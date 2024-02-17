@@ -12,18 +12,11 @@
 
 namespace dook
 {
-    /**
-     * @brief Interactable game object.
-     *
-     * @tparam T Type of the raw textures.
-     * @tparam S Type of the raw audio.
-     */
-    template <class T, class S>
     class Object : public Entity
     {
     private:
-        std::map<State, Texture<T>> textures;
-        std::map<State, Audio<S>> sounds;
+        std::map<State, Texture> textures;
+        std::map<State, Audio> sounds;
         State current_state;
         State base_state;
         /** Final possible state of the object. */
@@ -119,7 +112,14 @@ namespace dook
         /**
          * @brief Get the current texture of the object.
          */
-        Texture<T> &texture() const;
+        const Texture &texture() const;
+
+        /**
+         * @brief Get a modifiable reference to the current texture.
+         *
+         * @return Texture& texture reference.
+         */
+        Texture &texture();
 
         /**
          * @brief Get the current state of the object.

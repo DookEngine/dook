@@ -15,15 +15,14 @@ namespace dook
      * @tparam T Type of their raw texture.
      * @tparam S Type of their raw audio.
      */
-    template <class T, class S>
-    class Character final : public Object<T, S>
+    class Character final : public Object
     {
     private:
         CharacterStats _stats;
         CharacterStates _states;
         int ticks_since_last_damage;
         /** Get a modifiable reference to the stats object. */
-        CharacterStats &mut_stats() const { return _stats; }
+        CharacterStats &mut_stats() { return _stats; }
 
     public:
         /**
@@ -42,15 +41,14 @@ namespace dook
                   CharacterStates states,
                   Position position,
                   SourceInfo source)
-            : Object<T, S>(name,
-                           states.idle,
-                           states.dead,
-                           stats,
-                           EntityType::CHARACTER,
-                           position,
-                           source),
+            : Object(name,
+                     states.idle,
+                     states.dead,
+                     EntityType::CHARACTER,
+                     position,
+                     source),
               _stats(stats),
-              _states(states){};
+              _states(states) {}
         /**
          * @brief Construct a new Character object
          *
@@ -76,7 +74,8 @@ namespace dook
         /** Get a readonly reference to the stats object. */
         const CharacterStats &stats() const { return _stats; }
         const CharacterStates &states() const { return _states; }
-        void tick() override;
+
+        virtual void tick() override;
 
         /**
          * @brief Hurt a character by applying damage.

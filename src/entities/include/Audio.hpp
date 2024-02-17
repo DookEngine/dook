@@ -4,22 +4,16 @@
 #include <string>
 namespace dook
 {
-    template <class S>
     class Audio
     {
     private:
-        std::shared_ptr<S> _raw_audio;
         std::string _file_name;
 
-    protected:
-        /**
-         * @brief Load the audio file to memory.
-         *
-         * @param loader: Function to call with the filename to load the string.
-         */
-        virtual void load_audio(std::function<std::shared_ptr<S>(std::string)> loader) = 0;
-
     public:
+        virtual void load() = 0;
+        virtual bool loaded() = 0;
+        virtual void *raw_audio() = 0;
+
         /**
          * @brief Construct a new Audio object
          *
@@ -27,12 +21,5 @@ namespace dook
          */
         Audio(std::string file_name) : _file_name(file_name){};
         Audio() = delete;
-
-        /**
-         * @brief Get the raw audio file.
-         *
-         * @return S
-         */
-        virtual S raw_audio() = 0;
     };
 };

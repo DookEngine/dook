@@ -11,20 +11,16 @@ namespace dook
 {
     /**
      * @brief Contains information about a single level
-     *
-     * @tparam T
-     * @tparam S
      */
-    template <class T, class S>
     class Level : public Entity
     {
     private:
-        const std::unique_ptr<Texture<T>> background;
-        const std::unique_ptr<Texture<T>> foreground;
-        const std::unique_ptr<Texture<T>> passability;
-        std::shared_ptr<Character<T, S>> _main_character;
-        std::vector<std::shared_ptr<Character<T, S>>> characters;
-        std::vector<std::shared_ptr<Object<T, S>>> objects;
+        const std::unique_ptr<Texture> background;
+        const std::unique_ptr<Texture> foreground;
+        const std::unique_ptr<Texture> passability;
+        std::shared_ptr<Character> _main_character;
+        std::vector<std::shared_ptr<Character>> characters;
+        std::vector<std::shared_ptr<Object>> objects;
 
     public:
         /**
@@ -41,9 +37,9 @@ namespace dook
          */
         Level(
             std::string name,
-            std::unique_ptr<Texture<T>> background,
-            std::unique_ptr<Texture<T>> foreground,
-            std::unique_ptr<Texture<T>> passability,
+            std::unique_ptr<Texture> background,
+            std::unique_ptr<Texture> foreground,
+            std::unique_ptr<Texture> passability,
             SourceInfo source)
             : Entity(name, EntityType::LEVEL, source),
               background(std::move(background)),
@@ -64,9 +60,9 @@ namespace dook
          */
         Level(
             std::string name,
-            std::unique_ptr<Texture<T>> background,
-            std::unique_ptr<Texture<T>> foreground,
-            std::unique_ptr<Texture<T>> passability)
+            std::unique_ptr<Texture> background,
+            std::unique_ptr<Texture> foreground,
+            std::unique_ptr<Texture> passability)
             : Level(name,
                     std::move(background),
                     std::move(foreground),
@@ -79,7 +75,7 @@ namespace dook
          *
          * @param character
          */
-        void register_character(std::shared_ptr<Character<T, S>> character);
+        void register_character(std::shared_ptr<Character> character);
 
         /**
          * @brief Get the main character.
@@ -88,7 +84,7 @@ namespace dook
          *
          * @return std::shared_ptr<Character> The main character.
          */
-        std::shared_ptr<Character<T, S>> main_character();
+        std::shared_ptr<Character> main_character();
 
         void tick();
     };

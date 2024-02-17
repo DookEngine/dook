@@ -5,7 +5,6 @@
 
 namespace dook
 {
-    template <class T>
     class Texture
     {
     private:
@@ -19,33 +18,31 @@ namespace dook
          */
         std::optional<Rect> _animation_step;
 
-        std::shared_ptr<T> _raw_texture;
-
-        /**
-         * @brief Check if animation step is the last one.
-         *
-         * True if this is the final possible animation to draw.
-         * @return true If the draw rectangle touches the end of the texture.
-         * @return false otherwise.
-         */
-        bool is_animation_completed();
-
     protected:
         /**
          * @brief Get the size of the texure.
          */
         virtual Rect texture_size() const = 0;
 
+    public:
         /**
          * @brief Initialise a texture from the file.
          *
-         * @param loader Function to call to load a texture.
          * @return true on success.
          * @return false on failure.
          */
-        virtual bool load_texture(std::function<std::shared_ptr<T>(std::string)> loader) const = 0;
+        virtual bool load() = 0;
 
-    public:
+        /**
+         * @return true if the texture is loaded
+         * @return false otherwise.
+         */
+        virtual bool loaded() const = 0;
+
+        /**
+         * @brief Get the raw texture pointer.
+         */
+        virtual void *raw() const = 0;
         Texture(std::string file_name) : file_name(file_name)
         {
         }
@@ -64,11 +61,19 @@ namespace dook
          */
         void reset();
 
-        virtual T raw_texture() const = 0;
         /**
          * @brief Return currently active draw rectangle.
          */
-        const std::optional<Rect> &draw_rectangle() const { return draw_rectangle; };
+        const std::optional<Rect> &draw_rectangle() const { return _draw_rectangle; };
+
+        /**
+         * @brief Check if animation step is the last one.
+         *
+         * True if this is the final possible animation to draw.
+         * @return true If the draw rectangle touches the end of the texture.
+         * @return false otherwise.
+         */
+        bool is_animation_completed() const;
 
         virtual ~Texture() = default;
     };
