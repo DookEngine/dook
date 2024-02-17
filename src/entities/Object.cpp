@@ -33,13 +33,13 @@ bool dook::Object::can_remove() const
 
 const dook::Texture &dook::Object::texture() const
 {
-    const dook::Texture &texture = this->textures.at(this->current_state);
+    const dook::Texture &texture = *this->textures.at(this->current_state);
     return texture;
 };
 
 dook::Texture &dook::Object::texture()
 {
-    dook::Texture &texture = this->textures.at(this->current_state);
+    dook::Texture &texture = *this->textures.at(this->current_state);
     return texture;
 };
 

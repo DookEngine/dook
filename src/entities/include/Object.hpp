@@ -15,8 +15,8 @@ namespace dook
     class Object : public Entity
     {
     private:
-        std::map<State, Texture> textures;
-        std::map<State, Audio> sounds;
+        std::map<State, std::unique_ptr<Texture>> textures;
+        std::map<State, std::unique_ptr<Audio>> sounds;
         State current_state;
         State base_state;
         /** Final possible state of the object. */
