@@ -70,3 +70,8 @@ void dook::Object::tick()
         this->reset();
     }
 }
+
+dook::Position &dook::Object::position()
+{
+    return this->_position;
+}
