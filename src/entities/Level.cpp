@@ -3,7 +3,7 @@
 
 void dook::Level::register_character(std::shared_ptr<dook::Character> character)
 {
-    if (character->id() == 0)
+    if (character->stats().behaviour == AIType::CONTROLLED)
     {
         this->_main_character = character;
     }
