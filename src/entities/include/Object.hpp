@@ -33,11 +33,13 @@ namespace dook
                Position position,
                SourceInfo source)
             : Entity(name, type, source),
+              current_state(base_state),
               base_state(base_state),
               terminal_state(terminal_state),
-              current_state(base_state),
-              _instance_id(std::rand()),
-              _position(position) {}
+              _position(position),
+              _instance_id(std::rand())
+        {
+        }
 
         /**
          * @brief Set the object to new state.
