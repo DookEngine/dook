@@ -3,7 +3,7 @@
 
 namespace dook
 {
-    class NullTexture final : Texture
+    class NullTexture final : public Texture
     {
     private:
         bool _loaded;

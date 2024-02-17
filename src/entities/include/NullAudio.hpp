@@ -3,7 +3,7 @@
 
 namespace dook
 {
-    class NullAudio : Audio
+    class NullAudio : public Audio
     {
     private:
         bool _loaded;
