@@ -13,6 +13,8 @@ bool dook::Object::set_state(const dook::State &target_state)
     }
     Texture &old_texture = this->texture();
     old_texture.reset();
+    // TODO: Check if this could cause a problem if target_state ref
+    // is deleted by the parent closure?
     this->current_state = target_state;
     return true;
 }
