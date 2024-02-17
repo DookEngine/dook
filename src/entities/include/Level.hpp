@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 #include <Texture.hpp>
 #include <Entity.hpp>
 #include <Character.hpp>
