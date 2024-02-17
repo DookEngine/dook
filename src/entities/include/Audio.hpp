@@ -20,6 +20,7 @@ namespace dook
          * @param file_name Location of the audio file.
          */
         Audio(std::string file_name) : _file_name(file_name){};
+        virtual ~Audio() = default;
         Audio() = delete;
     };
 };
