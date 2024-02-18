@@ -3,6 +3,12 @@
 
 namespace dook
 {
+    /**
+     * @brief Empty texture object.
+     *
+     * Noop texture class to use for null service providers
+     * or testing.
+     */
     class NullTexture final : public Texture
     {
     private:

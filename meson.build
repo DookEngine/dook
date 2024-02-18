@@ -7,6 +7,7 @@ project(
 
 subdir('src/')
 subdir('src/entities')
+subdir('src/services')
 
 libentities = static_library('entities', entities_files, include_directories: entities_includes)
 
@@ -15,4 +16,16 @@ libentities_dep = declare_dependency(
   link_with: libentities,
 )
 
-executable('dook', main_file, dependencies: [libentities_dep])
+libservices = static_library(
+  'services',
+  services_files,
+  include_directories: services_includes,
+  dependencies: [libentities_dep],
+)
+
+libservices_dep = declare_dependency(
+  include_directories: services_includes,
+  link_with: libservices,
+)
+
+executable('dook', main_file, dependencies: [libentities_dep, libservices_dep])
