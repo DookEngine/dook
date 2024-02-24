@@ -11,6 +11,7 @@
 #include <NullTexture.hpp>
 #include <ServiceLocator.hpp>
 #include <NullAudio.hpp>
+#include <SDLGraphicsService.hpp>
 
 int main()
 {
@@ -38,4 +39,6 @@ int main()
     prot->position().x += 5;
     assert(prot->position().x == 5);
     std::cout << prot->name() << std::endl;
+    std::unique_ptr<dook::GraphicsService> graphicsService(new dook::SDLGraphicsService());
+    dook::ServiceLocator::provide(std::move(graphicsService));
 }

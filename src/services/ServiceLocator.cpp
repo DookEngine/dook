@@ -7,6 +7,11 @@ void dook::ServiceLocator::provide(std::unique_ptr<dook::LevelService> service)
     dook::ServiceLocator::locator->_level = std::move(service);
 }
 
+void dook::ServiceLocator::provide(std::unique_ptr<dook::GraphicsService> service)
+{
+    dook::ServiceLocator::locator->_graphics = std::move(service);
+}
+
 dook::LevelService &dook::ServiceLocator::level()
 {
     return *dook::ServiceLocator::locator->_level;
