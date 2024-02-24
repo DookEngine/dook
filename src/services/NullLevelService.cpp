@@ -14,7 +14,7 @@ dook::NullLevelService::NullLevelService() : LevelService()
         std::move(ps)));
 }
 
-bool dook::NullLevelService::load_level(std::string name)
+bool dook::NullLevelService::load_level(std::string)
 {
     return true;
 }
