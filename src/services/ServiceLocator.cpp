@@ -1,13 +1,16 @@
 #include <ServiceLocator.hpp>
 
-std::unique_ptr<dook::ServiceLocator> dook::ServiceLocator::locator(new dook::ServiceLocator());
+template <typename TextureType>
+std::unique_ptr<dook::ServiceLocator<TextureType>> dook::ServiceLocator<TextureType>::locator(new dook::ServiceLocator());
 
-void dook::ServiceLocator::provide(std::unique_ptr<dook::LevelService> service)
+template <typename TextureType>
+void dook::ServiceLocator<TextureType>::provide(std::unique_ptr<dook::LevelService> service)
 {
     dook::ServiceLocator::locator->_level = std::move(service);
 }
 
-dook::LevelService &dook::ServiceLocator::level()
+template <typename TextureType>
+dook::LevelService &dook::ServiceLocator<TextureType>::level()
 {
     return *dook::ServiceLocator::locator->_level;
 }

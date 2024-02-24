@@ -31,7 +31,7 @@ int main()
         stats,
         states,
         position);
-    auto level = dook::ServiceLocator::level().current_level();
+    auto level = dook::ServiceLocator<dook::NullTexture>::level().current_level();
     level->register_character(protogonist);
     auto prot = level->main_character();
     assert(prot == protogonist);

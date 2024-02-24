@@ -22,20 +22,5 @@ namespace dook
 
     public:
         NullTexture(std::string file_name) : Texture(file_name), _loaded(false){};
-        virtual bool load() override
-        {
-            this->_loaded = true;
-            return true;
-        };
-
-        virtual bool loaded() const override
-        {
-            return this->_loaded;
-        };
-
-        virtual void *raw() const override
-        {
-            return nullptr;
-        };
     };
 };

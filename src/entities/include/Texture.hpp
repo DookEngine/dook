@@ -25,24 +25,6 @@ namespace dook
         virtual Rect texture_size() const = 0;
 
     public:
-        /**
-         * @brief Initialise a texture from the file.
-         *
-         * @return true on success.
-         * @return false on failure.
-         */
-        virtual bool load() = 0;
-
-        /**
-         * @return true if the texture is loaded
-         * @return false otherwise.
-         */
-        virtual bool loaded() const = 0;
-
-        /**
-         * @brief Get the raw texture pointer.
-         */
-        virtual void *raw() const = 0;
         Texture(std::string file_name) : file_name(file_name)
         {
         }
