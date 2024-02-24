@@ -11,9 +11,6 @@ namespace dook
      */
     class NullTexture final : public Texture
     {
-    private:
-        bool _loaded;
-
     protected:
         virtual Rect texture_size() const override
         {
@@ -21,6 +18,6 @@ namespace dook
         }
 
     public:
-        NullTexture(std::string file_name) : Texture(file_name), _loaded(false){};
+        NullTexture(std::string file_name) : Texture(file_name) {}
     };
 };
