@@ -12,12 +12,11 @@ namespace dook
      * @brief Get services safely.
      *
      */
-    template <typename TextureType>
     class ServiceLocator
     {
     private:
         std::unique_ptr<LevelService> _level;
-        std::unique_ptr<GraphicsService<TextureType>> _graphics;
+        std::unique_ptr<GraphicsService> _graphics;
         static std::unique_ptr<ServiceLocator> locator;
         ServiceLocator() : _level(new NullLevelService()), _graphics(new NullGraphicsService()) {}
 
@@ -34,7 +33,7 @@ namespace dook
          *
          * @param service Graphics service to register.
          */
-        void static provide(std::unique_ptr<GraphicsService<TextureType>> service);
+        void static provide(std::unique_ptr<GraphicsService> service);
 
         /**
          * @brief Get the level service

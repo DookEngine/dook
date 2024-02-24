@@ -8,13 +8,13 @@ namespace dook
      * @brief Noop graphics service.
      *
      */
-    class NullGraphicsService : public GraphicsService<NullTexture>
+    class NullGraphicsService : public GraphicsService
     {
     protected:
         virtual void draw() override { return; }
 
     public:
-        virtual std::unique_ptr<NullTexture> load_texture(std::string file_name) override
+        virtual std::unique_ptr<Texture> load_texture(std::string file_name) override
         {
             return std::make_unique<NullTexture>(file_name);
         }

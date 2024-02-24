@@ -9,7 +9,6 @@ namespace dook
     /**
      * @brief This service handles the drawing and rendering.
      */
-    template <typename TextureType = Texture>
     class GraphicsService
     {
     private:
@@ -66,6 +65,6 @@ namespace dook
          * @param filename Filename to load from.
          * @return std::unique_ptr<TextureType> Unique ptr to the texture.
          */
-        virtual std::unique_ptr<TextureType> load_texture(std::string filename) = 0;
+        virtual std::unique_ptr<Texture> load_texture(std::string filename) = 0;
     };
 };
