@@ -12,6 +12,7 @@
 #include <ServiceLocator.hpp>
 #include <NullAudio.hpp>
 #include <SDLGraphicsService.hpp>
+#include <CommonLoggerService.hpp>
 
 int main()
 {
@@ -33,12 +34,14 @@ int main()
         states,
         position);
     auto level = dook::ServiceLocator::level().current_level();
+    std::unique_ptr<dook::GraphicsService> graphicsService(new dook::SDLGraphicsService());
+    dook::ServiceLocator::provide(std::move(graphicsService));
+    std::unique_ptr<dook::LoggerService> loggerService(new dook::CommonLoggerService());
+    dook::ServiceLocator::provide(std::move(loggerService));
     level->register_character(protogonist);
     auto prot = level->main_character();
     assert(prot == protogonist);
     prot->position().x += 5;
     assert(prot->position().x == 5);
-    std::cout << prot->name() << std::endl;
-    std::unique_ptr<dook::GraphicsService> graphicsService(new dook::SDLGraphicsService());
-    dook::ServiceLocator::provide(std::move(graphicsService));
+    dook::ServiceLocator::logger().log(prot->name());
 }
