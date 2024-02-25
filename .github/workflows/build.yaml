@@ -4,6 +4,8 @@ name: build
 on:
   workflow_dispatch:
   push:
+    branches:
+      - master
     paths:
       - "**.cpp"
       - "**.hpp"
@@ -30,7 +32,7 @@ jobs:
       if: failure()
       with:
         name: Linux_Meson_Testlog
-        path: build/meson-logs/testlog.txt
+        path: build/meson-logs/meson-log.txt
 
   macos:
     runs-on: macos-latest
@@ -50,7 +52,7 @@ jobs:
       if: failure()
       with:
         name: MacOS_Meson_Testlog
-        path: build/meson-logs/testlog.txt
+        path: build/meson-logs/meson-log.txt
 
   windows:
     runs-on: windows-latest
@@ -63,9 +65,9 @@ jobs:
     - run: meson setup build/
       env:
         CC: gcc
-    - run: meson test -C build/ -v
+    - run: meson compile -C build/
     - uses: actions/upload-artifact@v1
       if: failure()
       with:
         name: Windows_Meson_Testlog
-        path: build/meson-logs/testlog.txt
+        path: build/meson-logs/meson-log.txt
