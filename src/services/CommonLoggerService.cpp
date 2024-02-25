@@ -1,7 +1,6 @@
 #include <CommonLoggerService.hpp>
 #include <iostream>
 #include <chrono>
-#include <format>
 #include <iterator>
 #include <sstream>
 

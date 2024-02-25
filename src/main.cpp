@@ -13,8 +13,6 @@
 #include <NullAudio.hpp>
 #include <SDLGraphicsService.hpp>
 #include <CommonLoggerService.hpp>
-#include <chrono>
-#include <thread>
 
 int main()
 {
