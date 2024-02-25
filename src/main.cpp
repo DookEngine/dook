@@ -33,8 +33,6 @@ int main()
         states,
         position);
     auto level = dook::ServiceLocator::level().current_level();
-    std::unique_ptr<dook::GraphicsService> graphicsService(new dook::SDLGraphicsService());
-    dook::ServiceLocator::provide(std::move(graphicsService));
     std::unique_ptr<dook::LoggerService> loggerService(new dook::CommonLoggerService());
     dook::ServiceLocator::provide(std::move(loggerService));
     level->register_character(protogonist);
