@@ -13,6 +13,8 @@
 #include <NullAudio.hpp>
 #include <SDLGraphicsService.hpp>
 #include <CommonLoggerService.hpp>
+#include <chrono>
+#include <thread>
 
 int main()
 {
@@ -34,10 +36,10 @@ int main()
         states,
         position);
     auto level = dook::ServiceLocator::level().current_level();
-    std::unique_ptr<dook::GraphicsService> graphicsService(new dook::SDLGraphicsService());
-    dook::ServiceLocator::provide(std::move(graphicsService));
     std::unique_ptr<dook::LoggerService> loggerService(new dook::CommonLoggerService());
     dook::ServiceLocator::provide(std::move(loggerService));
+    std::unique_ptr<dook::GraphicsService> graphicsService(new dook::SDLGraphicsService({0, 0, 1920, 1080}));
+    dook::ServiceLocator::provide(std::move(graphicsService));
     level->register_character(protogonist);
     auto prot = level->main_character();
     assert(prot == protogonist);

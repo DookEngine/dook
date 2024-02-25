@@ -14,8 +14,8 @@ std::string dook::CommonLoggerService::time_stamp()
     char time_str[std::size("yyyy-mm-ddThh:mm:ss")];
     std::strftime(
         std::data(time_str),
-        std::size(time_str),
-        "%FT%TZ",
+        std::size(time_str) - 1,
+        "%FT%T",
         std::gmtime(&now_in_time_t));
     std::stringstream output;
     output << time_str;

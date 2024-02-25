@@ -54,5 +54,5 @@ executable(
   'dook',
   main_file,
   win_subsystem: 'windows',
-  dependencies: [libentities_dep, libservices_dep, libsdl_dep],
+  dependencies: [libentities_dep, libservices_dep, libsdl_dep, sdl2_dep],
 )
