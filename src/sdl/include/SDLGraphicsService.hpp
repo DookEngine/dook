@@ -1,7 +1,12 @@
 #pragma once
-#ifdef DCANCEL_SDL_MAIN
+#ifdef CANCEL_SDL_MAIN
+// SDL apperantly brings its own main function
+// which causes a problem on windows, we pass
+// -DCANCEL_SDL_MAIN on windows to trigger this
+// which stops SDL from passing its own main.
+// as per https://stackoverflow.com/a/25089610/6663851
 #define SDL_MAIN_HANDLED
-#endif // DCANCEL_SDL_MAIN
+#endif // CANCEL_SDL_MAIN
 #include <SDL.h>
 #include <GraphicsService.hpp>
 
