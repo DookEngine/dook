@@ -1,5 +1,6 @@
 services_files = files(
     'CommonLoggerService.cpp',
+    'GraphicsService.cpp',
     'LevelService.cpp',
     'NullLevelService.cpp',
     'ServiceLocator.cpp',
