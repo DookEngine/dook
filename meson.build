@@ -5,6 +5,10 @@ project(
   default_options: ['warning_level=3', 'cpp_std=c++20'],
 )
 
+if host_machine.system() == 'windows'
+  add_project_arguments([ '-DCANCEL_SDL_MAIN' ], language: 'cpp')
+endif
+
 subdir('src/')
 subdir('src/entities')
 subdir('src/services')

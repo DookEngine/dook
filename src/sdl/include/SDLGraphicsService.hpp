@@ -1,4 +1,7 @@
 #pragma once
+#ifdef DCANCEL_SDL_MAIN
+#define SDL_MAIN_HANDLED
+#endif // DCANCEL_SDL_MAIN
 #include <SDL.h>
 #include <GraphicsService.hpp>
 
