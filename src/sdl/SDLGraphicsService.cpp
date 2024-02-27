@@ -1,11 +1,14 @@
 #include <SDLGraphicsService.hpp>
 #include <SDLTexture.hpp>
 #include <ServiceLocator.hpp>
+#include <SDL_image.h>
 
 std::unique_ptr<dook::Texture> dook::SDLGraphicsService::load_texture(std::string filename)
 {
     // Obviously more will happen here.
     auto texture = std::make_unique<SDLTexture>(filename);
+    texture->surface() = IMG_Load(filename.c_str());
+    texture->texture() = SDL_CreateTextureFromSurface(this->renderer, texture->surface());
     texture->set_texture_size({0, 0, 0, 0});
     return texture;
 }
