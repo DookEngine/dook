@@ -6,6 +6,8 @@
 #include <NullGraphicsService.hpp>
 #include <LoggerService.hpp>
 #include <NullLoggerService.hpp>
+#include <InputService.hpp>
+#include <NullInputService.hpp>
 #include <Texture.hpp>
 
 namespace dook
@@ -20,8 +22,12 @@ namespace dook
         std::unique_ptr<LevelService> _level;
         std::unique_ptr<GraphicsService> _graphics;
         std::unique_ptr<LoggerService> _logger;
+        std::unique_ptr<InputService> _input;
         static std::unique_ptr<ServiceLocator> locator;
-        ServiceLocator() : _level(new NullLevelService()), _graphics(new NullGraphicsService()), _logger(new NullLoggerService()) {}
+        ServiceLocator() : _level(new NullLevelService()),
+                           _graphics(new NullGraphicsService()),
+                           _logger(new NullLoggerService()),
+                           _input(new NullInputService()) {}
 
     public:
         /**
@@ -46,6 +52,13 @@ namespace dook
         void static provide(std::unique_ptr<LoggerService> service);
 
         /**
+         * @brief Register an input service.
+         *
+         * @param service Input Service to register.
+         */
+        void static provide(std::unique_ptr<InputService> service);
+
+        /**
          * @brief Get the level service
          *
          * @return LevelService& Reference to level service.
@@ -65,5 +78,13 @@ namespace dook
          * @return LoggerService& Reference to the logger.
          */
         static LoggerService &logger();
+
+        /**
+         * @brief Get the registered input service.
+         *
+         * @return InputService& Regerence to the input
+         * processor service.
+         */
+        static InputService &input();
     };
 };
