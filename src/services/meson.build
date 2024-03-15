@@ -4,6 +4,7 @@ services_files = files(
     'LevelService.cpp',
     'NullLevelService.cpp',
     'ServiceLocator.cpp',
+    'NullInputService.cpp'
 )
 
 services_includes = include_directories('include')
