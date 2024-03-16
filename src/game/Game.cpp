@@ -1,6 +1,9 @@
+#include <ServiceLocator.hpp>
 #include <Game.hpp>
+#include <memory>
 #include <CommonLoggerService.hpp>
 #include <SDLGraphicsService.hpp>
+#include <SDLInputService.hpp>
 
 void dook::Game::tick()
 {
@@ -17,7 +20,7 @@ void create_dummy_character();
 bool dook::Game::mainloop()
 {
     create_dummy_character();
-    while (this->_quited)
+    while (!this->_quited)
     {
         this->tick();
     }
@@ -51,4 +54,5 @@ dook::Game::Game() : _quited(false)
 {
     ServiceLocator::provide(std::make_unique<CommonLoggerService>());
     ServiceLocator::provide(std::make_unique<SDLGraphicsService>());
+    ServiceLocator::provide(std::make_unique<SDLInputService>());
 }
