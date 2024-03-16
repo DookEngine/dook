@@ -87,6 +87,10 @@ namespace dook
          */
         std::shared_ptr<Character> main_character();
 
+        /**
+         * @brief Let objects take their turns.
+         *
+         */
         void tick();
     };
 };

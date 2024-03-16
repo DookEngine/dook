@@ -6,7 +6,7 @@ project(
 )
 
 if host_machine.system() == 'windows'
-  add_project_arguments([ '-DCANCEL_SDL_MAIN' ], language: 'cpp')
+  add_project_arguments(['-DCANCEL_SDL_MAIN'], language: 'cpp')
 endif
 
 subdir('src/')
@@ -61,24 +61,24 @@ libgame = static_library(
   'game',
   game_files,
   include_directories: game_includes,
-  dependencies: [libentities_dep, libservices_dep, sdl2_dep, sdl2_main_dep, sdl2_img_dep, libsdl]
+  dependencies: [
+    libentities_dep,
+    libservices_dep,
+    sdl2_dep,
+    sdl2_main_dep,
+    sdl2_img_dep,
+    libsdl_dep,
+  ],
 )
 
 libgame_dep = declare_dependency(
   include_directories: game_includes,
-  link_with: libgame
+  link_with: libgame,
 )
 
 executable(
   'dook',
   main_file,
   win_subsystem: 'windows',
-  dependencies: [
-    libentities_dep,
-    libservices_dep,
-    libsdl_dep,
-    sdl2_dep,
-    sdl2_img_dep,
-    libgame_dep
-  ],
+  dependencies: [libentities_dep, libservices_dep, libsdl_dep, sdl2_dep, sdl2_img_dep, libgame_dep],
 )
