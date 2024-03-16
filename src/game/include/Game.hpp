@@ -1,7 +1,3 @@
-#pragma once
-#include <memory>
-#include <ServiceLocator.hpp>
-
 namespace dook
 {
     /**
@@ -11,7 +7,6 @@ namespace dook
     class Game
     {
     private:
-        std::unique_ptr<ServiceLocator> locator;
         bool _quited;
 
         /**

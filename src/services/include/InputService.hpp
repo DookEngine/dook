@@ -15,7 +15,7 @@ namespace dook
     class InputService
     {
     public:
-        InputService() = default;
+        InputService(){};
 
         /**
          * @brief Process the next user input.
