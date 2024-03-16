@@ -14,3 +14,16 @@ std::shared_ptr<dook::Character> dook::Level::main_character()
 {
     return this->_main_character;
 }
+
+void dook::Level::tick()
+{
+    for (auto &obj : this->objects)
+    {
+        obj->tick();
+    }
+
+    for (auto &ch : this->characters)
+    {
+        ch->tick();
+    }
+}

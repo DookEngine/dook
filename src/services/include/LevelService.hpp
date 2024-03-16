@@ -33,6 +33,13 @@ namespace dook
          */
         virtual bool load_level(std::string name) = 0;
         virtual std::shared_ptr<Level> current_level();
+
+        /**
+         * @brief Tick every single object, make them take action, etc.
+         *
+         */
+        void tick();
+
         virtual ~LevelService() = default;
     };
 };
