@@ -19,11 +19,13 @@ void create_dummy_character();
 
 bool dook::Game::mainloop()
 {
+    ServiceLocator::logger().log("Starting game mainloop...");
     create_dummy_character();
     while (!this->_quited)
     {
         this->tick();
     }
+    ServiceLocator::logger().log("Mainloop terminated.");
     return this->_quited;
 }
 
@@ -53,6 +55,9 @@ void create_dummy_character()
 dook::Game::Game() : _quited(false)
 {
     ServiceLocator::provide(std::make_unique<CommonLoggerService>());
+    ServiceLocator::logger().log("Game startup ongoing...");
+    ServiceLocator::logger().log("Registering other services.");
     ServiceLocator::provide(std::make_unique<SDLGraphicsService>());
     ServiceLocator::provide(std::make_unique<SDLInputService>());
+    ServiceLocator::logger().log("Game startup completed.");
 }
