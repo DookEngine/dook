@@ -4,11 +4,13 @@ std::unique_ptr<dook::ServiceLocator> dook::ServiceLocator::locator(new dook::Se
 
 void dook::ServiceLocator::provide(std::unique_ptr<dook::LevelService> service)
 {
+    ServiceLocator::logger().log("New level service registered.");
     dook::ServiceLocator::locator->_level = std::move(service);
 }
 
 void dook::ServiceLocator::provide(std::unique_ptr<dook::GraphicsService> service)
 {
+    ServiceLocator::logger().log("New graphics service registered.");
     dook::ServiceLocator::locator->_graphics = std::move(service);
 }
 
@@ -19,6 +21,7 @@ void dook::ServiceLocator::provide(std::unique_ptr<dook::LoggerService> service)
 
 void dook::ServiceLocator::provide(std::unique_ptr<dook::InputService> service)
 {
+    ServiceLocator::logger().log("New input service registered.");
     dook::ServiceLocator::locator->_input = std::move(service);
 }
 
