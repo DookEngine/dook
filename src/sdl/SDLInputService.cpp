@@ -32,9 +32,9 @@ std::unique_ptr<dook::Command> dook::SDLInputService::process_event(SDL_Event &e
     switch (event.type)
     {
     case SDL_WINDOWEVENT:
-        return this->process_event(event);
+        return this->process_window_event(event);
     case SDL_KEYDOWN:
-        return this->process_event(event);
+        return this->process_keyboard_event(event);
     default:
         return nullptr;
     }
@@ -56,6 +56,5 @@ std::unique_ptr<dook::Command> dook::SDLInputService::tick()
 
 bool dook::SDLInputService::quit()
 {
-    ServiceLocator::logger().log("Quitting input service.");
     return this->_quit;
 }
