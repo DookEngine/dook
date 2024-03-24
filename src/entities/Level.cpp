@@ -27,3 +27,7 @@ void dook::Level::tick()
         ch->tick();
     }
 }
+
+std::vector<std::shared_ptr<dook::Object>> dook::Level::objects_within_region(const dook::Rect &region)
+{
+}
