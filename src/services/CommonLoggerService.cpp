@@ -3,7 +3,6 @@
 #include <chrono>
 #include <iterator>
 #include <sstream>
-#include <format>
 
 std::string dook::CommonLoggerService::time_stamp()
 {
@@ -22,18 +21,14 @@ std::string dook::CommonLoggerService::time_stamp()
     return output.str();
 }
 
-template <typename... Ms>
-void dook::CommonLoggerService::log(std::string fmt, Ms... messages)
+void dook::CommonLoggerService::log(std::string message)
 {
     auto current_date = this->time_stamp();
-    auto message = std::format(fmt, messages...);
     std::cout << current_date << ": " << message << std::endl;
 }
 
-template <typename... Ms>
-void dook::CommonLoggerService::error(std::string fmt, Ms... messages)
+void dook::CommonLoggerService::error(std::string message)
 {
     auto current_date = this->time_stamp();
-    auto message = std::format(fmt, messages...);
     std::cerr << current_date << ": " << message << std::endl;
 }
