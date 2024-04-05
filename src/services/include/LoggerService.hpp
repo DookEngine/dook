@@ -17,13 +17,16 @@ namespace dook
          *
          * @param message
          */
-        virtual void log(std::string message) = 0;
+        template <typename... Ms>
+        virtual void log(std::string message, Ms... messages) = 0;
 
         /**
          * @brief Log an error to... somewhere.
          *
          * @param message
          */
-        virtual void error(std::string message) = 0;
+
+        template <typename... Ms>
+        virtual void error(std::string message, Ms... messages) = 0;
     };
 }

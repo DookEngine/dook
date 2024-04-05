@@ -17,8 +17,9 @@ void dook::SDLGraphicsService::draw()
 {
     SDL_SetRenderDrawColor(this->renderer, 0x00, 0x00, 0x00, 0x00);
     SDL_RenderClear(this->renderer);
-    ServiceLocator::level()
-        SDL_RenderPresent(this->renderer);
+    auto objects = ServiceLocator::level().current_level()->objects_within_region(this->viewport());
+    ServiceLocator::logger().log()
+    SDL_RenderPresent(this->renderer);
 }
 
 dook::SDLGraphicsService::~SDLGraphicsService()

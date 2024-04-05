@@ -24,13 +24,15 @@ namespace dook
          *
          * @param message
          */
-        virtual void error(std::string message) override;
+        template <typename... Ms>
+        virtual void error(std::string message, Ms... messages) override;
 
         /**
          * @brief Log a message using std::cout.
          *
          * @param message Message to log.
          */
-        virtual void log(std::string message) override;
+        template <typename... Ms>
+        virtual void log(std::string fmt, Ms... messages) override;
     };
 }

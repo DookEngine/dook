@@ -17,3 +17,8 @@ dook::Rect dook::operator-(dook::Rect left, const dook::Rect &right)
         left.w,
         left.h};
 }
+
+bool dook::Rect::contains(float x, float y)
+{
+    return (this->x < x) && (x < (this->x + this->w)) && (this->y < y) && (y < (this->y + this->h));
+}
