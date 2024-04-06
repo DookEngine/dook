@@ -1,4 +1,5 @@
 #include <GraphicsService.hpp>
+#include <ServiceLocator.hpp>
 
 dook::Rect &dook::GraphicsService::viewport()
 {
@@ -12,5 +13,6 @@ const dook::Rect &dook::GraphicsService::viewport() const
 
 void dook::GraphicsService::tick()
 {
+    ServiceLocator::logger().log("Tickin'");
     this->draw();
 }

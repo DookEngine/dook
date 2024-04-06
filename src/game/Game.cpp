@@ -42,7 +42,7 @@ void create_dummy_character()
         5,
         0.5,
         2};
-    dook::Position position{0, 0};
+    dook::Position position{0, 200};
     auto protogonist = std::make_shared<dook::Character>(
         std::string{"main_character"},
         stats,

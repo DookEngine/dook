@@ -44,12 +44,9 @@ std::unique_ptr<dook::Command> dook::SDLInputService::tick()
 {
     SDL_Event event;
     std::unique_ptr<dook::Command> command;
-    while (!this->quit())
+    while (SDL_PollEvent(&event) && !this->quit())
     {
-        while (SDL_PollEvent(&event))
-        {
-            command = this->process_event(event);
-        }
+        command = this->process_event(event);
     }
     return command;
 }
