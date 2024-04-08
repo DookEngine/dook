@@ -10,6 +10,10 @@ dook::SDLGraphicsService::load_texture(std::string filename, const Rect &draw_re
     return std::make_unique<SDLTexture>(this->renderer, filename, draw_rect);
 }
 
+std::unique_ptr<dook::Texture> dook::SDLGraphicsService::load_texture(std::string filename)
+{
+    // TODO: We can get the texture size here.
+    return this->load_texture(filename, {0, 0, 0, 0});
 }
 
 void dook::SDLGraphicsService::draw()

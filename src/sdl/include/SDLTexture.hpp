@@ -68,6 +68,6 @@ namespace dook
          *
          * @return SDL_Rect Value of the SDL_Rectangle
          */
-        SDL_Surface *&surface();
+        SDL_Rect draw_rect_as_sdl() const;
     };
 };

@@ -60,10 +60,19 @@ namespace dook
         void tick();
 
         /**
+         * @brief Load a texture into the memory with the given draw rect.
+         *
+         * @param filename Path to the texture.
+         * @param draw_rect Draw rectangle information.
+         * @return std::unique_ptr<Texture> Unique ptr to the texture.
+         */
+        virtual std::unique_ptr<Texture> load_texture(std::string filename, const Rect &draw_rect) = 0;
+
+        /**
          * @brief Load a texture into memory from its filename.
          *
          * @param filename Filename to load from.
-         * @return std::unique_ptr<TextureType> Unique ptr to the texture.
+         * @return std::unique_ptr<Texture> Unique ptr to the texture.
          */
         virtual std::unique_ptr<Texture> load_texture(std::string filename) = 0;
     };

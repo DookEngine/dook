@@ -41,6 +41,8 @@ namespace dook
          * The associated renderer and the window is destroyed in this step.
          */
         ~SDLGraphicsService();
+
+        virtual std::unique_ptr<Texture> load_texture(std::string filename, const Rect &draw_rectangle) override;
         virtual std::unique_ptr<Texture> load_texture(std::string filename) override;
     };
 }
