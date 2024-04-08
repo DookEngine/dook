@@ -12,19 +12,36 @@
 
 namespace dook
 {
+    struct SDLSurfaceDeleter
+    {
+        void operator()(SDL_Surface *surface)
+        {
+            SDL_FreeSurface(surface);
+        }
+    };
+
+    struct SDLTextureDeleter
+    {
+        void operator()(SDL_Texture *texture)
+        {
+            SDL_DestroyTexture(texture);
+        }
+    };
+
     class SDLTexture : public Texture
     {
     private:
-        SDL_Surface *_surface;
-        SDL_Texture *_texture;
+        std::shared_ptr<SDL_Surface> _surface;
+        std::shared_ptr<SDL_Texture> _texture;
         Rect _texture_size;
 
     protected:
         virtual Rect texture_size() const override;
 
     public:
-        using Texture::Texture;
-        ~SDLTexture();
+        SDLTexture(SDL_Renderer *renderer, std::string filename, Rect draw_rect, Rect animation_step);
+        SDLTexture(SDL_Renderer *renderer, std::string filename) : SDLTexture(renderer, filename, {0, 0, 0, 0}, {0, 0, 0, 0}){};
+        ~SDLTexture() = default;
         /**
          * @brief Set the texture size object
          *
@@ -35,14 +52,21 @@ namespace dook
         /**
          * @brief Return the underlying texture object in GPU memory.
          *
-         * @return SDL_Texture&
+         * @return SDL_Texture
          */
-        SDL_Texture *&texture();
+        std::shared_ptr<SDL_Texture> texture();
 
         /**
          * @brief Return the underlying surface object in CPU memory.
          *
-         * @return SDL_Surface&
+         * @return SDL_Surface
+         */
+        std::shared_ptr<SDL_Surface> surface();
+
+        /**
+         * @brief Get the draw rectangle as an SDL rectangle.
+         *
+         * @return SDL_Rect Value of the SDL_Rectangle
          */
         SDL_Surface *&surface();
     };
