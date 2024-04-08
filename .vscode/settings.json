@@ -1,6 +1,8 @@
 {
     "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
     "files.associations": {
+        "*.erd": "json",
+        "*.vuerd": "json",
         "optional": "cpp",
         "string": "cpp",
         "variant": "cpp",
@@ -73,7 +75,8 @@
         "stack": "cpp",
         "thread": "cpp",
         "span": "cpp",
-        "ranges": "cpp"
+        "ranges": "cpp",
+        "format": "cpp"
     },
     "mesonbuild.buildFolder": "build",
     "C_Cpp.default.configurationProvider": "mesonbuild.mesonbuild"
