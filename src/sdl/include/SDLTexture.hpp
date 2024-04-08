@@ -39,8 +39,8 @@ namespace dook
         virtual Rect texture_size() const override;
 
     public:
-        SDLTexture(SDL_Renderer *renderer, std::string filename, Rect draw_rect, Rect animation_step);
-        SDLTexture(SDL_Renderer *renderer, std::string filename) : SDLTexture(renderer, filename, {0, 0, 0, 0}, {0, 0, 0, 0}){};
+        SDLTexture(SDL_Renderer *renderer, std::string filename, Rect draw_rect);
+        SDLTexture(SDL_Renderer *renderer, std::string filename) : SDLTexture(renderer, filename, {0, 0, 0, 0}){};
         ~SDLTexture() = default;
         /**
          * @brief Set the texture size object

@@ -32,9 +32,9 @@ SDL_Rect dook::SDLTexture::draw_rect_as_sdl() const
     return rect;
 }
 
-dook::SDLTexture::SDLTexture(SDL_Renderer *renderer, std::string filename, Rect draw_rect, Rect animation_step) : Texture(filename, draw_rect, animation_step)
+dook::SDLTexture::SDLTexture(SDL_Renderer *renderer, std::string filename, Rect draw_rect) : Texture(filename, draw_rect)
 {
-    std::shared_ptr<SDL_Surface> surface(IMG_Load(filename.c_str()), dook::SDLSurfaceDeleter{});
+    std::shared_ptr<SDL_Surface> surface(IMG_Load(filename.c_str()), SDLSurfaceDeleter{});
     auto error = IMG_GetError();
     if (error != NULL)
     {
@@ -42,6 +42,21 @@ dook::SDLTexture::SDLTexture(SDL_Renderer *renderer, std::string filename, Rect 
     }
     std::shared_ptr<SDL_Texture> texture(SDL_CreateTextureFromSurface(renderer, surface.get()), dook::SDLTextureDeleter{});
     this->_surface = surface;
+    this->set_texture_size(Rect{
+        0,
+        0,
+        (float)this->_surface->w,
+        (float)this->_surface->h});
+
+    if (this->draw_rectangle().value().w < this->_surface->w)
+    {
+        // When the draw rectangle is smaller than the image itself
+        // that means the image is animated on the x-axes.
+        this->_animation_step.emplace(Rect{
+            0,
+            0,
+            (float)this->draw_rectangle().value().w,
+            0});
+    }
     this->_texture = texture;
-    this->set_texture_size(draw_rect);
 }
