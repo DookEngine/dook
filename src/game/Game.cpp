@@ -4,6 +4,7 @@
 #include <CommonLoggerService.hpp>
 #include <SDLGraphicsService.hpp>
 #include <SDLInputService.hpp>
+#include <SDLTexture.hpp>
 
 void dook::Game::tick()
 {
@@ -48,6 +49,8 @@ void create_dummy_character()
         stats,
         states,
         position);
+    auto texture = dook::ServiceLocator::graphics().load_texture("../resources/idle-cropped.png", dook::Rect{0, 0, 24, 32});
+    protogonist->set_texture_for_state(state, std::move(texture));
     auto level = dook::ServiceLocator::level().current_level();
     level->register_character(protogonist);
 }

@@ -75,3 +75,8 @@ dook::Position &dook::Object::position()
 {
     return this->_position;
 }
+
+void dook::Object::set_texture_for_state(const State &state, std::unique_ptr<Texture> texture)
+{
+    this->textures[state] = std::move(texture);
+}
