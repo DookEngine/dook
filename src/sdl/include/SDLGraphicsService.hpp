@@ -32,8 +32,8 @@ namespace dook
          * Initializes and opens the window object as well.
          * @param screen_size
          */
-        SDLGraphicsService(Rect screen_size);
-        SDLGraphicsService() : SDLGraphicsService({0, 0, 1920, 1080}) {}
+        SDLGraphicsService(Camera viewport);
+        SDLGraphicsService() : SDLGraphicsService(Camera{}) {}
 
         /**
          * @brief Destroy the SDLGraphicsService object

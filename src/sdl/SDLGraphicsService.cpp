@@ -20,7 +20,7 @@ void dook::SDLGraphicsService::draw()
 {
     SDL_SetRenderDrawColor(this->renderer, 0x00, 0x00, 0x00, 0x00);
     SDL_RenderClear(this->renderer);
-    auto objects = ServiceLocator::level().current_level()->objects_within_region(this->viewport());
+    auto objects = ServiceLocator::level().current_level()->objects_within_region(this->viewport().viewport());
     for (const auto &object : objects)
     {
         auto texture = dynamic_cast<SDLTexture &>(object->texture());
@@ -47,7 +47,7 @@ dook::SDLGraphicsService::~SDLGraphicsService()
     SDL_Quit();
 }
 
-dook::SDLGraphicsService::SDLGraphicsService(dook::Rect screen_size)
+dook::SDLGraphicsService::SDLGraphicsService(dook::Camera screen_size)
 {
     ServiceLocator::logger().log("Attempting display service startup...");
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -56,7 +56,7 @@ dook::SDLGraphicsService::SDLGraphicsService(dook::Rect screen_size)
         return;
     };
 
-    if (SDL_CreateWindowAndRenderer(screen_size.w, screen_size.h, SDL_WINDOW_RESIZABLE, &this->window, &this->renderer))
+    if (SDL_CreateWindowAndRenderer(screen_size.size().x, screen_size.size().y, SDL_WINDOW_RESIZABLE, &this->window, &this->renderer))
     {
         ServiceLocator::logger().error("Window creation failed.");
     }

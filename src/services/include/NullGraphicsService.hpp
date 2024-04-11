@@ -23,7 +23,7 @@ namespace dook
             return this->load_texture(file_name);
         }
         NullGraphicsService() : GraphicsService() {}
-        NullGraphicsService(Rect rect) : GraphicsService(rect) {}
+        NullGraphicsService(Camera viewport) : GraphicsService(viewport) {}
         ~NullGraphicsService() = default;
     };
 }

@@ -3,6 +3,7 @@
 #include <string>
 #include <Rect.hpp>
 #include <Texture.hpp>
+#include <Camera.hpp>
 
 namespace dook
 {
@@ -12,7 +13,7 @@ namespace dook
     class GraphicsService
     {
     private:
-        Rect _viewport;
+        Camera _viewport;
 
     protected:
         /**
@@ -20,14 +21,14 @@ namespace dook
          *
          * @return const Rect& Current drawing area.
          */
-        const Rect &viewport() const;
+        const Camera &viewport() const;
 
         /**
          * @brief Return a reference to the currently drawn area.
          *
          * @return Rect& Reference to the drawn area.
          */
-        Rect &viewport();
+        Camera &viewport();
 
         /**
          * @brief Draw the screen wrt to the draw rect.
@@ -43,9 +44,9 @@ namespace dook
          * @param viewport the size of the "screen" and its offset
          * in the total texture.
          */
-        GraphicsService(Rect viewport) : _viewport(viewport) {}
+        GraphicsService(Camera viewport) : _viewport(viewport) {}
 
-        GraphicsService() : GraphicsService({0, 0, 1920, 1080}) {}
+        GraphicsService() : GraphicsService(Camera{}) {}
 
         /**
          * @brief Destroy the Graphics Service object
