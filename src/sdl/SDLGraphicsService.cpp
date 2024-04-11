@@ -27,10 +27,10 @@ void dook::SDLGraphicsService::draw()
         auto raw_texture = texture.texture();
         SDL_Rect srcrect = texture.draw_rect_as_sdl();
         SDL_Rect destrct{
-            0,
-            0,
-            240,
-            360};
+            static_cast<int>(object->position().x),
+            static_cast<int>(object->position().y),
+            srcrect.w,
+            srcrect.h};
         SDL_RenderCopy(
             this->renderer,
             raw_texture.get(),
