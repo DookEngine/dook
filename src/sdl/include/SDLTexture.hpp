@@ -9,6 +9,7 @@
 #endif // CANCEL_SDL_MAIN
 #include <SDL.h>
 #include <Texture.hpp>
+#include <memory>
 
 namespace dook
 {
