@@ -152,5 +152,16 @@ namespace dook
          * @return Position& Pass the object position by reference.
          */
         Position &position();
+
+        /**
+         * @brief Set the texture for the given state
+         *
+         * @param state Object state the texture will be active in.
+         * @param texture Texture to be displayed when the object
+         * is active.
+         */
+        void set_texture_for_state(
+            const State &state,
+            std::unique_ptr<Texture> texture);
     };
 };

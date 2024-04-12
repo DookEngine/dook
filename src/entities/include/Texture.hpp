@@ -13,6 +13,8 @@ namespace dook
          * @brief Subsection of the texture to draw.
          */
         std::optional<Rect> _draw_rectangle;
+
+    protected:
         /**
          * @brief Iteration step for animating.
          */

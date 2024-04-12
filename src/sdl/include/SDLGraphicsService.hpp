@@ -32,8 +32,8 @@ namespace dook
          * Initializes and opens the window object as well.
          * @param screen_size
          */
-        SDLGraphicsService(Rect screen_size);
-        SDLGraphicsService() : SDLGraphicsService({0, 0, 1920, 1080}) {}
+        SDLGraphicsService(Camera viewport);
+        SDLGraphicsService() : SDLGraphicsService(Camera{}) {}
 
         /**
          * @brief Destroy the SDLGraphicsService object
@@ -41,6 +41,8 @@ namespace dook
          * The associated renderer and the window is destroyed in this step.
          */
         ~SDLGraphicsService();
+
+        virtual std::unique_ptr<Texture> load_texture(std::string filename, const Rect &draw_rectangle) override;
         virtual std::unique_ptr<Texture> load_texture(std::string filename) override;
     };
 }

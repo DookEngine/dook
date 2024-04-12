@@ -25,5 +25,16 @@ namespace dook
          * @brief Reverse of the +
          */
         friend Rect operator-(Rect left, const Rect &right);
+
+        /**
+         * @brief Evaluate whether or not a certain x, y coord pair
+         * falls within this rectangle.
+         *
+         * @param x Horizontal offset of the point.
+         * @param y Vertical offset of the point.
+         * @return true If the point is within the rectangle.
+         * @return false If the point is outside the rectangle.
+         */
+        bool contains(float x, float y) const;
     };
 }

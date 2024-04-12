@@ -19,18 +19,7 @@ namespace dook
         }
         ~CommonLoggerService() = default;
 
-        /**
-         * @brief Log an error to std::cerr
-         *
-         * @param message
-         */
         virtual void error(std::string message) override;
-
-        /**
-         * @brief Log a message using std::cout.
-         *
-         * @param message Message to log.
-         */
         virtual void log(std::string message) override;
     };
 }

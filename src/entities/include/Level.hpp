@@ -88,6 +88,15 @@ namespace dook
         std::shared_ptr<Character> main_character();
 
         /**
+         * @brief Get the objects within the given region.
+         *
+         * @param region Region to get the objects within.
+         * @return A vector of shared pointers to objects that
+         * fall within the region.
+         */
+        std::vector<std::shared_ptr<Object>> objects_within_region(const Rect &region);
+
+        /**
          * @brief Let objects take their turns.
          *
          */

@@ -3,20 +3,40 @@
 #include <ServiceLocator.hpp>
 #include <SDL_image.h>
 
-std::unique_ptr<dook::Texture> dook::SDLGraphicsService::load_texture(std::string filename)
+std::unique_ptr<dook::Texture>
+dook::SDLGraphicsService::load_texture(std::string filename, const Rect &draw_rect)
 {
     // Obviously more will happen here.
-    auto texture = std::make_unique<SDLTexture>(filename);
-    texture->surface() = IMG_Load(filename.c_str());
-    texture->texture() = SDL_CreateTextureFromSurface(this->renderer, texture->surface());
-    texture->set_texture_size({0, 0, 0, 0});
-    return texture;
+    return std::make_unique<SDLTexture>(this->renderer, filename, draw_rect);
+}
+
+std::unique_ptr<dook::Texture> dook::SDLGraphicsService::load_texture(std::string filename)
+{
+    // TODO: We can get the texture size here.
+    return this->load_texture(filename, {0, 0, 0, 0});
 }
 
 void dook::SDLGraphicsService::draw()
 {
     SDL_SetRenderDrawColor(this->renderer, 0x00, 0x00, 0x00, 0x00);
     SDL_RenderClear(this->renderer);
+    auto objects = ServiceLocator::level().current_level()->objects_within_region(this->viewport().viewport());
+    for (const auto &object : objects)
+    {
+        auto texture = dynamic_cast<SDLTexture &>(object->texture());
+        auto raw_texture = texture.texture();
+        SDL_Rect srcrect = texture.draw_rect_as_sdl();
+        SDL_Rect destrct{
+            static_cast<int>(object->position().x),
+            static_cast<int>(object->position().y),
+            srcrect.w,
+            srcrect.h};
+        SDL_RenderCopy(
+            this->renderer,
+            raw_texture.get(),
+            &srcrect,
+            &destrct);
+    }
     SDL_RenderPresent(this->renderer);
 }
 
@@ -27,7 +47,7 @@ dook::SDLGraphicsService::~SDLGraphicsService()
     SDL_Quit();
 }
 
-dook::SDLGraphicsService::SDLGraphicsService(dook::Rect screen_size)
+dook::SDLGraphicsService::SDLGraphicsService(dook::Camera screen_size)
 {
     ServiceLocator::logger().log("Attempting display service startup...");
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -36,7 +56,7 @@ dook::SDLGraphicsService::SDLGraphicsService(dook::Rect screen_size)
         return;
     };
 
-    if (SDL_CreateWindowAndRenderer(screen_size.w, screen_size.h, SDL_WINDOW_RESIZABLE, &this->window, &this->renderer))
+    if (SDL_CreateWindowAndRenderer(screen_size.size().x, screen_size.size().y, SDL_WINDOW_RESIZABLE, &this->window, &this->renderer))
     {
         ServiceLocator::logger().error("Window creation failed.");
     }

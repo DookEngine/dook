@@ -24,6 +24,7 @@ namespace dook
          *
          * @param message
          */
+
         virtual void error(std::string message) = 0;
     };
 }
