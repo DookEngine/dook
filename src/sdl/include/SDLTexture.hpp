@@ -13,22 +13,6 @@
 
 namespace dook
 {
-    struct SDLSurfaceDeleter
-    {
-        void operator()(SDL_Surface *surface)
-        {
-            SDL_FreeSurface(surface);
-        }
-    };
-
-    struct SDLTextureDeleter
-    {
-        void operator()(SDL_Texture *texture)
-        {
-            SDL_DestroyTexture(texture);
-        }
-    };
-
     class SDLTexture : public Texture
     {
     private:

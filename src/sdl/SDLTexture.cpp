@@ -2,6 +2,19 @@
 #include <ServiceLocator.hpp>
 #include <SDL_image.h>
 
+struct dook::SDLDeleter
+{
+    void operator()(SDL_Surface *surface)
+    {
+        SDL_FreeSurface(surface);
+    }
+
+    void operator()(SDL_Texture *texture)
+    {
+        SDL_DestroyTexture(texture);
+    }
+};
+
 void dook::SDLTexture::set_texture_size(dook::Rect size)
 {
     this->_texture_size = size;
@@ -34,13 +47,13 @@ SDL_Rect dook::SDLTexture::draw_rect_as_sdl() const
 
 dook::SDLTexture::SDLTexture(SDL_Renderer *renderer, std::string filename, Rect draw_rect) : Texture(filename, draw_rect)
 {
-    std::shared_ptr<SDL_Surface> surface(IMG_Load(filename.c_str()), SDLSurfaceDeleter{});
+    std::shared_ptr<SDL_Surface> surface(IMG_Load(filename.c_str()), SDLDeleter{});
     auto error = IMG_GetError();
     if (error != NULL)
     {
         ServiceLocator::logger().error(error);
     }
-    std::shared_ptr<SDL_Texture> texture(SDL_CreateTextureFromSurface(renderer, surface.get()), dook::SDLTextureDeleter{});
+    std::shared_ptr<SDL_Texture> texture(SDL_CreateTextureFromSurface(renderer, surface.get()), SDLDeleter{});
     this->_surface = surface;
     this->set_texture_size(Rect{
         0,
