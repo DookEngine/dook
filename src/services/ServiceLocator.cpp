@@ -25,6 +25,12 @@ void dook::ServiceLocator::provide(std::unique_ptr<dook::InputService> service)
     dook::ServiceLocator::locator->_input = std::move(service);
 }
 
+void dook::ServiceLocator::provide(std::unique_ptr<dook::ParserService> service)
+{
+    ServiceLocator::logger().log("New parser service registered.");
+    dook::ServiceLocator::locator->_parser = std::move(service);
+}
+
 dook::LevelService &dook::ServiceLocator::level()
 {
     return *dook::ServiceLocator::locator->_level;
@@ -43,4 +49,9 @@ dook::LoggerService &dook::ServiceLocator::logger()
 dook::InputService &dook::ServiceLocator::input()
 {
     return *dook::ServiceLocator::locator->_input;
+}
+
+dook::ParserService &dook::ServiceLocator::parser()
+{
+    return *dook::ServiceLocator::locator->_parser;
 }

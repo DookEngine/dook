@@ -8,6 +8,8 @@
 #include <NullLoggerService.hpp>
 #include <InputService.hpp>
 #include <NullInputService.hpp>
+#include <ParserService.hpp>
+#include <NullParserService.hpp>
 #include <Texture.hpp>
 
 namespace dook
@@ -23,11 +25,13 @@ namespace dook
         std::unique_ptr<GraphicsService> _graphics;
         std::unique_ptr<LoggerService> _logger;
         std::unique_ptr<InputService> _input;
+        std::unique_ptr<ParserService> _parser;
         static std::unique_ptr<ServiceLocator> locator;
         ServiceLocator() : _level(new NullLevelService()),
                            _graphics(new NullGraphicsService()),
                            _logger(new NullLoggerService()),
-                           _input(new NullInputService()) {}
+                           _input(new NullInputService()),
+                           _parser(new NullParserService()) {}
 
     public:
         /**
@@ -59,6 +63,13 @@ namespace dook
         void static provide(std::unique_ptr<InputService> service);
 
         /**
+         * @brief Register a parser service.
+         *
+         * @param service Parser Service to register.
+         */
+        void static provide(std::unique_ptr<ParserService> service);
+
+        /**
          * @brief Get the level service
          *
          * @return LevelService& Reference to level service.
@@ -82,9 +93,16 @@ namespace dook
         /**
          * @brief Get the registered input service.
          *
-         * @return InputService& Regerence to the input
+         * @return InputService& Reference to the input
          * processor service.
          */
         static InputService &input();
+
+        /**
+         * @brief Get the registered parser service.
+         *
+         * @return ParserService& Reference to the parser service.
+         */
+        static ParserService &parser();
     };
 };
