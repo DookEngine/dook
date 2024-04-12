@@ -5,6 +5,11 @@ project(
   default_options: ['warning_level=3', 'cpp_std=c++20'],
 )
 
+# Disable warnings for debugging.
+if host_machine.system() == 'linux'
+  add_project_arguments(['-w'], language: 'cpp')
+endif
+
 if host_machine.system() == 'windows'
   add_project_arguments(['-DCANCEL_SDL_MAIN'], language: 'cpp')
 endif
