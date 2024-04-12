@@ -17,7 +17,11 @@ subdir('src/game')
 
 # Entities Dependency
 
-libentities = static_library('entities', entities_files, include_directories: entities_includes)
+libentities = static_library(
+  'entities',
+  entities_files,
+  include_directories: entities_includes,
+)
 
 libentities_dep = declare_dependency(
   include_directories: entities_includes,
@@ -40,14 +44,23 @@ libservices_dep = declare_dependency(
 # SDL Wrapper Depenedency
 
 sdl2_dep = dependency('sdl2')
-sdl2_main_dep = dependency('sdl2main', required: host_machine.system() == 'windows')
+sdl2_main_dep = dependency(
+  'sdl2main',
+  required: host_machine.system() == 'windows',
+)
 sdl2_img_dep = dependency('sdl2_image')
 
 libsdl = static_library(
   'sdl',
   sdl_files,
   include_directories: sdl_includes,
-  dependencies: [libentities_dep, libservices_dep, sdl2_dep, sdl2_main_dep, sdl2_img_dep],
+  dependencies: [
+    libentities_dep,
+    libservices_dep,
+    sdl2_dep,
+    sdl2_main_dep,
+    sdl2_img_dep,
+  ],
 )
 
 libsdl_dep = declare_dependency(
@@ -80,5 +93,12 @@ executable(
   'dook',
   main_file,
   win_subsystem: 'windows',
-  dependencies: [libentities_dep, libservices_dep, libsdl_dep, sdl2_dep, sdl2_img_dep, libgame_dep],
+  dependencies: [
+    libentities_dep,
+    libservices_dep,
+    libsdl_dep,
+    libgame_dep,
+    sdl2_dep,
+    sdl2_img_dep,
+  ],
 )
