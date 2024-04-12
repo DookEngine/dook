@@ -2,7 +2,7 @@
 #include <ServiceLocator.hpp>
 #include <SDL_image.h>
 
-struct dook::SDLDeleter
+struct SDLDeleter
 {
     void operator()(SDL_Surface *surface)
     {
