@@ -14,6 +14,7 @@ subdir('src/entities')
 subdir('src/services')
 subdir('src/sdl')
 subdir('src/game')
+subdir('src/jparser')
 
 # Entities Dependency
 
@@ -68,6 +69,18 @@ libsdl_dep = declare_dependency(
   link_with: libsdl,
 )
 
+# JSON Parser dependency
+libjparser = static_library(
+  'jparser',
+  jparser_files,
+  include_directories: jparser_includes,
+  dependencies: [libentities_dep, libservices_dep],
+)
+
+libjparser_dep = declare_dependency(
+  include_directories: jparser_includes,
+  link_with: libjparser,
+)
 
 # Game dependency, this hopefully wraps everything together.
 libgame = static_library(
@@ -97,6 +110,7 @@ executable(
     libentities_dep,
     libservices_dep,
     libsdl_dep,
+    libjparser_dep,
     libgame_dep,
     sdl2_dep,
     sdl2_img_dep,
