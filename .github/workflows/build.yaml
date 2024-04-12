@@ -15,58 +15,59 @@ on:
       - "**.hpp"
 
 jobs:
+
   linux:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-python@v1
-        with:
-          python-version: "3.x"
-      - run: pip install meson ninja
-      - run: meson setup build/
-        env:
-          CC: gcc
-      - run: meson compile -C build/
-      - uses: actions/upload-artifact@v1
-        if: failure()
-        with:
-          name: Linux_Meson_Testlog
-          path: src/sdl/include/SDLTexture.hpp
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+    - run: pip install meson ninja
+    - run: meson setup build/
+      env:
+        CC: gcc
+    - run: meson compile -C build/
+    - uses: actions/upload-artifact@v1
+      if: failure()
+      with:
+        name: Linux_Meson_Testlog
+        path: build/meson-logs/meson-log.txt
 
   macos:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-python@v1
-        with:
-          python-version: "3.x"
-      - run: brew install gcc
-      - run: pip install meson ninja
-      - run: meson setup build/
-        env:
-          CC: clang
-          CXX: clang++
-      - run: meson compile -C build/
-      - uses: actions/upload-artifact@v1
-        if: failure()
-        with:
-          name: MacOS_Meson_Testlog
-          path: build/meson-logs/meson-log.txt
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+    - run: brew install gcc
+    - run: pip install meson ninja
+    - run: meson setup build/
+      env:
+        CC: clang
+        CXX: clang++
+    - run: meson compile -C build/
+    - uses: actions/upload-artifact@v1
+      if: failure()
+      with:
+        name: MacOS_Meson_Testlog
+        path: build/meson-logs/meson-log.txt
 
   windows:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-python@v1
-        with:
-          python-version: "3.x"
-      - run: pip install meson ninja
-      - run: meson setup build/
-        env:
-          CC: gcc
-      - run: meson compile -C build/
-      - uses: actions/upload-artifact@v1
-        if: failure()
-        with:
-          name: Windows_Meson_Testlog
-          path: build/meson-logs/meson-log.txt
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+    - run: pip install meson ninja
+    - run: meson setup build/
+      env:
+        CC: gcc
+    - run: meson compile -C build/
+    - uses: actions/upload-artifact@v1
+      if: failure()
+      with:
+        name: Windows_Meson_Testlog
+        path: build/meson-logs/meson-log.txt

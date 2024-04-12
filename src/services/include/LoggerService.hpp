@@ -3,7 +3,6 @@
 #include <string>
 namespace dook
 {
-    // TRIGGER WORKFLOW
     /**
      * @brief Used to log events.
      */
