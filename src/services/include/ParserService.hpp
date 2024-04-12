@@ -5,6 +5,10 @@
 
 namespace dook
 {
+    /**
+     * @brief Service used to emit entities.
+     *
+     */
     class ParserService
     {
     protected:
@@ -27,7 +31,7 @@ namespace dook
         resolve_stream(const std::string &resource_identifier) = 0;
 
     public:
-        ParserService();
+        ParserService() = default;
         /**
          * @brief Parse level information from given resource_identifier.
          *
