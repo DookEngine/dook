@@ -32,6 +32,7 @@ namespace dook
 
     public:
         ParserService() = default;
+        virtual ~ParserService() = default;
         /**
          * @brief Parse level information from given resource_identifier.
          *
