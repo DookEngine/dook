@@ -19,7 +19,7 @@ namespace dook
          * @return std::unique_ptr<Level> Pointer to the level.
          */
         [[nodiscard]] virtual std::unique_ptr<Level>
-        parse_level(const std::istream &stream) = 0;
+        parse_level(std::istream &stream) = 0;
 
         /**
          * @brief Resolve a given resource identifier to a readable stream.

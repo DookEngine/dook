@@ -2,7 +2,7 @@
 #include <sstream>
 
 [[nodiscard]] std::unique_ptr<dook::Level>
-dook::NullParserService::parse_level(const std::istream &)
+dook::NullParserService::parse_level(std::istream &)
 {
     return nullptr;
 }
