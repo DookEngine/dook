@@ -1,0 +1,215 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://github.com/DookEngine/dook/blob/main/src/jparser/schemas/resources.schema.json",
+    "title": "Resources",
+    "description": "Describe the available resources for a Dook engine game",
+    "type": "object",
+    "properties": {
+        "engine_version": {
+            "description": "Which version of the engine the game is written for.",
+            "type": "string"
+        },
+        "entities": {
+            "description": "Holds the entities accessible from the game.",
+            "type": "object",
+            "properties": {
+                "characters": {
+                    "type": "array",
+                    "description": "List of Characters in the game.",
+                    "items": {
+                        "$ref": "#/$defs/Character"
+                    },
+                    "minItems": 1
+                },
+                "levels": {
+                    "type": "array",
+                    "description": "List of the Levels",
+                    "items": {
+                        "$ref": "#/$defs/Level"
+                    },
+                    "minItems": 1
+                }
+            }
+        },
+        "main_character": {
+            "type": "string",
+            "description": "ID of the main character"
+        },
+        "first_level": {
+            "type": "string",
+            "description": "Name of the first level."
+        },
+        "required": [
+            "engine_version",
+            "entities",
+            "main_character"
+        ]
+    },
+    "$defs": {
+        "Vector2": {
+            "type": "object",
+            "description": "A tuple of x/y coords",
+            "properties": {
+                "x": {
+                    "type": "number"
+                },
+                "y": {
+                    "type": "number"
+                },
+                "required": [
+                    "x",
+                    "y"
+                ]
+            }
+        },
+        "Texture": {
+            "type": "object",
+            "description": "Represents a texture file",
+            "properties": {
+                "path": {
+                    "type": "string",
+                    "description": "Path to a texture file"
+                },
+                "size": {
+                    "$ref": "#/$defs/Vector2"
+                },
+                "flipped": {
+                    "type": "boolean",
+                    "description": "Flips the texture in y axis if true."
+                },
+                "required": [
+                    "path"
+                ]
+            }
+        },
+        "State": {
+            "type": "object",
+            "description": "Describes the states that can be used by objects",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "enum": [
+                        "attack",
+                        "idle",
+                        "run"
+                    ]
+                },
+                "texture": {
+                    "$ref": "#/$defs/Texture"
+                },
+                "required": [
+                    "name",
+                    "texture"
+                ]
+            }
+        },
+        "CharacterStats": {
+            "type": "object",
+            "description": "Statistics of the Characters",
+            "properties": {
+                "max_health": {
+                    "type": "number"
+                },
+                "speed": {
+                    "type": "number"
+                },
+                "required": [
+                    "max_health",
+                    "speed"
+                ]
+            }
+        },
+        "Character": {
+            "type": "object",
+            "description": "A single character.",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "ID of the character class"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the character"
+                },
+                "stats": {
+                    "$ref": "#/$defs/CharacterStats"
+                },
+                "states": {
+                    "type": "object",
+                    "description": "Information about character states, if any is missing, idle is used in place.",
+                    "properties": {
+                        "idle": {
+                            "$ref": "#/$defs/State"
+                        },
+                        "dead": {
+                            "$ref": "#/$defs/State"
+                        },
+                        "moving_left": {
+                            "$ref": "#/$defs/State"
+                        },
+                        "moving_right": {
+                            "$ref": "#/$defs/State"
+                        },
+                        "hurting": {
+                            "$ref": "#/$defs/State"
+                        },
+                        "required": [
+                            "idle"
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "name",
+                    "states",
+                    "stats"
+                ]
+            }
+        },
+        "Level": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the level"
+                },
+                "characters": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "character_id": {
+                                "type": "string",
+                                "description": "ID of the base character"
+                            },
+                            "location": {
+                                "description": "Character position on map",
+                                "$ref": "#/$defs/Vector2"
+                            },
+                            "required": [
+                                "character_id",
+                                "location"
+                            ]
+                        }
+                    }
+                },
+                "background": {
+                    "$ref": "#/$defs/Texture",
+                    "description": "Background texture."
+                },
+                "foreground": {
+                    "$ref": "#/$defs/Texture",
+                    "description": "Foreground Texture"
+                },
+                "passability": {
+                    "$ref": "#/$defs/Texture",
+                    "description": "Determines where the character can pass through"
+                },
+                "required": [
+                    "background",
+                    "passability"
+                ]
+            }
+        }
+    }
+}
