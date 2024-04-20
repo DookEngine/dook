@@ -24,6 +24,7 @@ libentities = static_library(
   include_directories: entities_includes,
 )
 
+
 libentities_dep = declare_dependency(
   include_directories: entities_includes,
   link_with: libentities,
