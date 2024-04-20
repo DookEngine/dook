@@ -1,0 +1,26 @@
+{
+    "$schema": "https://raw.githubusercontent.com/DookEngine/dook/main/src/jparser/schemas/resources.schema.json",
+    "engine_version": "v1.0",
+    "entities": {
+        "characters": [
+            {
+                "id": "0",
+                "name": "main",
+                "states": {
+                    "idle": {
+                        "name": "idle",
+                        "texture": {
+                            "flipped": false,
+                            "path": "./IDLE.png"
+                        }
+                    }
+                },
+                "stats": {
+                    "max_health": 10,
+                    "speed": 10
+                }
+            }
+        ]
+    },
+    "main_character": "0"
+}
