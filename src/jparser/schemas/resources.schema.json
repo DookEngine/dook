@@ -38,13 +38,13 @@
         "first_level": {
             "type": "string",
             "description": "Name of the first level."
-        },
-        "required": [
-            "engine_version",
-            "entities",
-            "main_character"
-        ]
+        }
     },
+    "required": [
+        "engine_version",
+        "entities",
+        "main_character"
+    ],
     "$defs": {
         "Vector2": {
             "type": "object",
@@ -55,12 +55,12 @@
                 },
                 "y": {
                     "type": "number"
-                },
-                "required": [
-                    "x",
-                    "y"
-                ]
-            }
+                }
+            },
+            "required": [
+                "x",
+                "y"
+            ]
         },
         "Texture": {
             "type": "object",
@@ -76,11 +76,11 @@
                 "flipped": {
                     "type": "boolean",
                     "description": "Flips the texture in y axis if true."
-                },
-                "required": [
-                    "path"
-                ]
-            }
+                }
+            },
+            "required": [
+                "path"
+            ]
         },
         "State": {
             "type": "object",
@@ -96,12 +96,12 @@
                 },
                 "texture": {
                     "$ref": "#/$defs/Texture"
-                },
-                "required": [
-                    "name",
-                    "texture"
-                ]
-            }
+                }
+            },
+            "required": [
+                "name",
+                "texture"
+            ]
         },
         "CharacterStats": {
             "type": "object",
@@ -112,12 +112,12 @@
                 },
                 "speed": {
                     "type": "number"
-                },
-                "required": [
-                    "max_health",
-                    "speed"
-                ]
-            }
+                }
+            },
+            "required": [
+                "max_health",
+                "speed"
+            ]
         },
         "Character": {
             "type": "object",
@@ -152,19 +152,19 @@
                         },
                         "hurting": {
                             "$ref": "#/$defs/State"
-                        },
-                        "required": [
-                            "idle"
-                        ]
-                    }
-                },
-                "required": [
-                    "id",
-                    "name",
-                    "states",
-                    "stats"
-                ]
-            }
+                        }
+                    },
+                    "required": [
+                        "idle"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "states",
+                "stats"
+            ]
         },
         "Level": {
             "type": "object",
@@ -185,13 +185,13 @@
                             "location": {
                                 "description": "Character position on map",
                                 "$ref": "#/$defs/Vector2"
-                            },
-                            "required": [
-                                "character_id",
-                                "location"
-                            ]
+                            }
                         }
-                    }
+                    },
+                    "required": [
+                        "character_id",
+                        "location"
+                    ]
                 },
                 "background": {
                     "$ref": "#/$defs/Texture",
@@ -204,12 +204,12 @@
                 "passability": {
                     "$ref": "#/$defs/Texture",
                     "description": "Determines where the character can pass through"
-                },
-                "required": [
-                    "background",
-                    "passability"
-                ]
-            }
+                }
+            },
+            "required": [
+                "background",
+                "passability"
+            ]
         }
     }
 }
