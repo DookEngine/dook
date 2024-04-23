@@ -20,6 +20,15 @@ namespace dook
         ~Game() = default;
 
         /**
+         * @brief Load game data from a file.
+         *
+         * @param file_path path to the file.
+         * @return true If loads correctly.
+         * @return false Otherwise.
+         */
+        bool load_game_data(std::string file_path);
+
+        /**
          * @brief Execute the game mainloop until the user quits.
          *
          * @return true if user quits without problems.

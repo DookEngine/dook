@@ -2,6 +2,7 @@
 #include <istream>
 #include <memory>
 #include <Level.hpp>
+#include <EntityBundle.hpp>
 
 namespace dook
 {
@@ -12,6 +13,15 @@ namespace dook
     class ParserService
     {
     protected:
+        /**
+         * @brief Parse the entities in a bundle and return it.
+         *
+         * @param stream Stream to parse.
+         * @return std::unique_ptr<EntityBundle> Pointer to entity bundle.
+         */
+        [[nodiscard]] virtual std::unique_ptr<EntityBundle>
+        parse_entites(std::istream &stream) = 0;
+
         /**
          * @brief Parse a level object from an input stream.
          *

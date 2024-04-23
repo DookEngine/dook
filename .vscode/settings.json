@@ -76,7 +76,12 @@
         "thread": "cpp",
         "span": "cpp",
         "ranges": "cpp",
-        "format": "cpp"
+        "format": "cpp",
+        "any": "cpp",
+        "forward_list": "cpp",
+        "fstream": "cpp",
+        "iomanip": "cpp",
+        "valarray": "cpp"
     },
     "mesonbuild.buildFolder": "build",
     "C_Cpp.default.configurationProvider": "mesonbuild.mesonbuild"
