@@ -12,26 +12,25 @@ namespace dook
      */
     class ParserService
     {
-    private:
+    protected:
         std::unique_ptr<EntityBundle> _entity_bundle;
 
-    protected:
         /**
          * @brief Parse the entities in a bundle and return it.
          *
          * @param stream Stream to parse.
          * @return std::unique_ptr<EntityBundle> Pointer to entity bundle.
          */
-        [[nodiscard]] virtual std::unique_ptr<EntityBundle>
+        [[nodiscard]] virtual const EntityBundle &
         parse_entites(std::istream &stream) = 0;
 
         /**
          * @brief Parse a level object from an input stream.
          *
          * @param stream Stream to parse.
-         * @return std::unique_ptr<Level> Pointer to the level.
+         * @return std::unique_ptr<Level> Reference to the entity bundle
          */
-        [[nodiscard]] virtual std::unique_ptr<Level>
+        [[nodiscard]] virtual const EntityBundle &
         parse_manifest(std::istream &stream) = 0;
 
         /**
@@ -70,16 +69,16 @@ namespace dook
          * @param resource_identifier Some sort of identifier that can be resolved to a stream.
          * @return Level
          */
-        [[nodiscard]] std::unique_ptr<Level>
+        [[nodiscard]] const EntityBundle &
         load_manifest(std::string resource_identifier);
 
         /**
          * @brief Switch the active level.
          *
          * @param level_id Level id to switch to.
-         * @return std::unique_ptr<Level> Unique ptr
+         * @return std::shared_ptr<Level> Unique ptr
          */
-        [[nodiscard]] std::unique_ptr<Level>
+        [[nodiscard]] virtual std::shared_ptr<Level>
         switch_level(std::string level_id);
     };
 } // namespace dook

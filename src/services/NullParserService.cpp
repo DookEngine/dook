@@ -1,16 +1,16 @@
 #include <NullParserService.hpp>
 #include <sstream>
 
-[[nodiscard]] std::unique_ptr<dook::Level>
+[[nodiscard]] const dook::EntityBundle &
 dook::NullParserService::parse_manifest(std::istream &)
 {
-    return nullptr;
+    return *this->_entity_bundle;
 }
 
-[[nodiscard]] std::unique_ptr<dook::EntityBundle>
+[[nodiscard]] const dook::EntityBundle &
 dook::NullParserService::parse_entites(std::istream &)
 {
-    return nullptr;
+    return *this->_entity_bundle;
 }
 
 [[nodiscard]] std::unique_ptr<std::istream>

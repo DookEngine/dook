@@ -19,3 +19,8 @@ void dook::LevelService::tick()
         level->tick();
     }
 }
+
+bool dook::LevelService::load_level(std::shared_ptr<Level> level)
+{
+    this->set_level(level);
+}

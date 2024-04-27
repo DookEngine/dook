@@ -31,7 +31,8 @@ namespace dook
          * @return true If the load is sucessful.
          * @return false otherwise.
          */
-        virtual bool load_level(std::string name) = 0;
+        virtual bool load_level(std::shared_ptr<dook::Level> level);
+
         virtual std::shared_ptr<Level> current_level();
 
         /**

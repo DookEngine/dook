@@ -26,10 +26,10 @@ namespace dook
       parse_character(json json_object);
 
    protected:
-      [[nodiscard]] virtual std::unique_ptr<EntityBundle>
+      [[nodiscard]] virtual const EntityBundle &
       parse_entites(std::istream &stream) override;
 
-      [[nodiscard]] virtual std::unique_ptr<Level>
+      [[nodiscard]] virtual const EntityBundle &
       parse_manifest(std::istream &stream) override;
 
       [[nodiscard]] virtual std::unique_ptr<std::istream>

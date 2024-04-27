@@ -34,7 +34,7 @@ dook::JSONParserService::parse_character(nlohmann::json json_object)
     return character_object;
 }
 
-[[nodiscard]] std::unique_ptr<dook::EntityBundle>
+[[nodiscard]] const dook::EntityBundle &
 dook::JSONParserService::parse_entites(std::istream &stream)
 {
     EntityBundle bundle;
@@ -47,10 +47,13 @@ dook::JSONParserService::parse_entites(std::istream &stream)
             auto character_object = this->parse_character(character);
             bundle.characters.push_back(character_object);
         }
+        this->_entity_bundle = std::make_unique<EntityBundle>(bundle);
+        return this->entity_bundle();
     }
     catch (const std::exception &e)
     {
         ServiceLocator::logger().error("Invalid JSON manifest for the game.");
+        return this->entity_bundle();
     }
 }
 
@@ -60,10 +63,10 @@ dook::JSONParserService::load_level(std::string)
     return nullptr;
 }
 
-[[nodiscard]] std::unique_ptr<dook::Level> dook::JSONParserService::parse_manifest(std::istream &stream)
+[[nodiscard]] const dook::EntityBundle &dook::JSONParserService::parse_manifest(std::istream &stream)
 {
     auto parsed_data = json::parse(stream);
-    return nullptr;
+    return this->parse_entites(stream);
 }
 
 [[nodiscard]] std::unique_ptr<std::istream>

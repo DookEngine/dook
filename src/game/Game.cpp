@@ -76,6 +76,8 @@ dook::Game::Game() : _quited(false)
  */
 bool dook::Game::load_game_data(std::string file_path)
 {
-    auto new_level = ServiceLocator::parser().load_manifest(file_path);
+    auto entity_bundle = ServiceLocator::parser().load_manifest(file_path);
+    auto level = ServiceLocator::parser().switch_level(entity_bundle.first_level);
+    ServiceLocator::level().load_level(level);
     return true;
 }

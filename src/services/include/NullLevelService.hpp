@@ -7,6 +7,5 @@ namespace dook
     {
     public:
         NullLevelService();
-        virtual bool load_level(std::string name) override;
     };
 }

@@ -2,6 +2,7 @@
 #include <Character.hpp>
 #include <vector>
 #include <memory>
+#include <string>
 
 namespace dook
 {
@@ -12,5 +13,6 @@ namespace dook
     struct EntityBundle
     {
         std::vector<std::shared_ptr<Character>> characters;
+        std::string first_level;
     };
 }
