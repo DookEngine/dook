@@ -45,7 +45,7 @@ dook::JSONParserService::parse_entites(std::istream &stream)
         for (auto character : characters)
         {
             auto character_object = this->parse_character(character);
-            bundle.characters.push_back(std::make_shared<Character>(character_object));
+            bundle.characters.push_back(character_object);
         }
     }
     catch (const std::exception &e)
