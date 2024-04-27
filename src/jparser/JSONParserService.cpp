@@ -1,5 +1,4 @@
 #include <JSONParserService.hpp>
-#include <nlohmann/json.hpp>
 #include <fstream>
 #include <memory>
 #include <CharacterStats.hpp>
@@ -25,7 +24,7 @@ dook::JSONParserService::parse_character(nlohmann::json json_object)
         state,
         state};
     std::string character_name(json_object["name"]);
-    Position position(0, 0);
+    dook::Position position{0.0, 0.0};
     auto character_object = std::make_shared<Character>(character_name,
                                                         stats,
                                                         states,
@@ -55,8 +54,13 @@ dook::JSONParserService::parse_entites(std::istream &stream)
     }
 }
 
-[[nodiscard]] std::unique_ptr<dook::Level>
-dook::JSONParserService::parse_level(std::istream &stream)
+std::unique_ptr<dook::Level>
+dook::JSONParserService::load_level(std::string)
+{
+    return nullptr;
+}
+
+[[nodiscard]] std::unique_ptr<dook::Level> dook::JSONParserService::parse_manifest(std::istream &stream)
 {
     auto parsed_data = json::parse(stream);
     return nullptr;

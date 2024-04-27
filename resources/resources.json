@@ -20,7 +20,46 @@
                     "speed": 10
                 }
             }
+        ],
+        "levels": [
+            {
+                "name": "enterance",
+                "background": {
+                    "flipped": false,
+                    "path": "./bg.png",
+                    "size": {
+                        "x": 0,
+                        "y": 0
+                    }
+                },
+                "foreground": {
+                    "flipped": false,
+                    "path": "./fg.png",
+                    "size": {
+                        "x": 0,
+                        "y": 0
+                    }
+                },
+                "passability": {
+                    "flipped": false,
+                    "path": "./ps.png",
+                    "size": {
+                        "x": 0,
+                        "y": 0
+                    }
+                },
+                "characters": [
+                    {
+                        "character_id": "0",
+                        "location": {
+                            "x": 0,
+                            "y": 0
+                        }
+                    }
+                ]
+            }
         ]
     },
+    "first_level": "enterance",
     "main_character": "0"
 }

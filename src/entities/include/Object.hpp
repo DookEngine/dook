@@ -101,6 +101,7 @@ namespace dook
                   {"", 0})
         {
         }
+
         /**
          * @brief Execute a command.
          */

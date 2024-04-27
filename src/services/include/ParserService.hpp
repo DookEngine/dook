@@ -12,6 +12,9 @@ namespace dook
      */
     class ParserService
     {
+    private:
+        std::unique_ptr<EntityBundle> _entity_bundle;
+
     protected:
         /**
          * @brief Parse the entities in a bundle and return it.
@@ -29,7 +32,7 @@ namespace dook
          * @return std::unique_ptr<Level> Pointer to the level.
          */
         [[nodiscard]] virtual std::unique_ptr<Level>
-        parse_level(std::istream &stream) = 0;
+        parse_manifest(std::istream &stream) = 0;
 
         /**
          * @brief Resolve a given resource identifier to a readable stream.
@@ -40,16 +43,43 @@ namespace dook
         [[nodiscard]] virtual std::unique_ptr<std::istream>
         resolve_stream(const std::string &resource_identifier) = 0;
 
+        /**
+         * @brief Switch to a specific level
+         *
+         * @param level_id
+         * @return std::unique_ptr<Level>
+         */
+        [[nodiscard]] virtual std::unique_ptr<Level>
+        load_level(std::string level_id) = 0;
+
     public:
         ParserService() = default;
         virtual ~ParserService() = default;
+
+        /**
+         * @brief Get the reference to the entity bundle.
+         *
+         * @return const EntityBundle& Constant entity bundle reference.
+         */
+        [[nodiscard]] const EntityBundle &
+        entity_bundle() const;
+
         /**
          * @brief Parse level information from given resource_identifier.
          *
          * @param resource_identifier Some sort of identifier that can be resolved to a stream.
          * @return Level
          */
-        std::unique_ptr<Level>
-        parse_level(std::string resource_identifier);
+        [[nodiscard]] std::unique_ptr<Level>
+        load_manifest(std::string resource_identifier);
+
+        /**
+         * @brief Switch the active level.
+         *
+         * @param level_id Level id to switch to.
+         * @return std::unique_ptr<Level> Unique ptr
+         */
+        [[nodiscard]] std::unique_ptr<Level>
+        switch_level(std::string level_id);
     };
 } // namespace dook

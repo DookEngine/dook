@@ -72,7 +72,7 @@ libsdl_dep = declare_dependency(
 
 # JSON Parser dependency
 
-json_dep = dependency('nlohmann_json')
+json_dep = dependency('nlohmann_json', required: true)
 
 libjparser = static_library(
   'jparser',
@@ -98,6 +98,8 @@ libgame = static_library(
     sdl2_main_dep,
     sdl2_img_dep,
     libsdl_dep,
+    libjparser_dep,
+    json_dep,
   ],
 )
 

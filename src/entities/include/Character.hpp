@@ -71,6 +71,8 @@ namespace dook
                         position,
                         {"", 0}) {}
 
+        ~Character() = default;
+
         /** Get a readonly reference to the stats object. */
         const CharacterStats &stats() const { return _stats; }
         const CharacterStates &states() const { return _states; }
