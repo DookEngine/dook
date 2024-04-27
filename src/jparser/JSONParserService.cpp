@@ -1,5 +1,6 @@
 #include <JSONParserService.hpp>
 #include <fstream>
+#include <filesystem>
 #include <memory>
 #include <CharacterStats.hpp>
 #include <CharacterStates.hpp>
@@ -53,6 +54,7 @@ dook::JSONParserService::parse_entites(std::istream &stream)
     catch (const std::exception &e)
     {
         ServiceLocator::logger().error("Invalid JSON manifest for the game.");
+        ServiceLocator::logger().error(e.what());
         return this->entity_bundle();
     }
 }
@@ -72,5 +74,13 @@ dook::JSONParserService::load_level(std::string)
 [[nodiscard]] std::unique_ptr<std::istream>
 dook::JSONParserService::resolve_stream(const std::string &resource_identifier)
 {
-    return std::make_unique<std::ifstream>(resource_identifier);
+    if (std::filesystem::exists(resource_identifier))
+    {
+        return std::make_unique<std::ifstream>(resource_identifier);
+    }
+    else
+    {
+        ServiceLocator::logger().error("JSON Manifest cannot be located.");
+        return nullptr;
+    }
 }
