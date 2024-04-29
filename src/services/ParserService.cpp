@@ -4,7 +4,7 @@ const dook::EntityBundle &
 dook::ParserService::load_manifest(std::string resource_identifier)
 {
     auto istream = this->resolve_stream(resource_identifier);
-    return this->parse_manifest(*istream);
+    return this->parse_manifest(std::move(istream));
 }
 
 const dook::EntityBundle &

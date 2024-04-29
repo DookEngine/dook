@@ -22,7 +22,7 @@ namespace dook
          * @return std::unique_ptr<EntityBundle> Pointer to entity bundle.
          */
         [[nodiscard]] virtual const EntityBundle &
-        parse_entites(std::istream &stream) = 0;
+        parse_entites(std::unique_ptr<std::istream> stream) = 0;
 
         /**
          * @brief Parse a level object from an input stream.
@@ -31,7 +31,7 @@ namespace dook
          * @return std::unique_ptr<Level> Reference to the entity bundle
          */
         [[nodiscard]] virtual const EntityBundle &
-        parse_manifest(std::istream &stream) = 0;
+        parse_manifest(std::unique_ptr<std::istream> stream) = 0;
 
         /**
          * @brief Resolve a given resource identifier to a readable stream.
@@ -48,7 +48,7 @@ namespace dook
          * @param level_id
          * @return std::unique_ptr<Level>
          */
-        [[nodiscard]] virtual std::unique_ptr<Level>
+        [[nodiscard]] virtual std::shared_ptr<Level>
         load_level(std::string level_id) = 0;
 
     public:

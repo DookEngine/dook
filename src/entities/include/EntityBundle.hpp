@@ -1,5 +1,6 @@
 #pragma once
 #include <Character.hpp>
+#include <Level.hpp>
 #include <vector>
 #include <memory>
 #include <string>
@@ -13,6 +14,7 @@ namespace dook
     struct EntityBundle
     {
         std::vector<std::shared_ptr<Character>> characters;
+        std::vector<std::shared_ptr<Level>> levels;
         std::string first_level;
     };
 }

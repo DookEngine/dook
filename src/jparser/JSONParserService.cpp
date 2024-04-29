@@ -36,16 +36,17 @@ dook::JSONParserService::parse_character(nlohmann::json json_object)
 }
 
 [[nodiscard]] const dook::EntityBundle &
-dook::JSONParserService::parse_entites(std::istream &stream)
+dook::JSONParserService::parse_entites(std::unique_ptr<std::istream> stream)
 {
     EntityBundle bundle;
     try
     {
-        auto parsed_data = json::parse(stream);
-        auto characters = parsed_data["characters"];
+        auto parsed_data = json::parse(*stream);
+        auto characters = parsed_data["entities"]["characters"];
         for (auto character : characters)
         {
             auto character_object = this->parse_character(character);
+            ServiceLocator::logger().log(character_object->name());
             bundle.characters.push_back(character_object);
         }
         this->_entity_bundle = std::make_unique<EntityBundle>(bundle);
@@ -59,16 +60,24 @@ dook::JSONParserService::parse_entites(std::istream &stream)
     }
 }
 
-std::unique_ptr<dook::Level>
-dook::JSONParserService::load_level(std::string)
+std::shared_ptr<dook::Level>
+dook::JSONParserService::load_level(std::string name)
 {
-    return nullptr;
+    std::shared_ptr<Level> expected_level = nullptr;
+    for (auto &level : this->_entity_bundle->levels)
+    {
+        if (level->name() == name)
+        {
+            expected_level = level;
+        }
+    }
+    return expected_level;
 }
 
-[[nodiscard]] const dook::EntityBundle &dook::JSONParserService::parse_manifest(std::istream &stream)
+[[nodiscard]] const dook::EntityBundle &dook::JSONParserService::parse_manifest(std::unique_ptr<std::istream> stream)
 {
-    auto parsed_data = json::parse(stream);
-    return this->parse_entites(stream);
+    auto parsed_data = json::parse(*stream);
+    return this->parse_entites(std::move(stream));
 }
 
 [[nodiscard]] std::unique_ptr<std::istream>
