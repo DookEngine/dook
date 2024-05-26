@@ -18,7 +18,7 @@ namespace dook
         {
             return std::make_unique<NullTexture>(file_name);
         }
-        virtual std::unique_ptr<Texture> load_texture(std::string file_name, const Rect &draw_rect) override
+        virtual std::unique_ptr<Texture> load_texture(std::string file_name, const Rect &) override
         {
             return this->load_texture(file_name);
         }
