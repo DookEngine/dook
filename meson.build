@@ -102,3 +102,14 @@ executable(
     sdl2_img_dep,
   ],
 )
+
+doxygen = find_program('doxygen', required: false)
+if doxygen.found()
+  message('Doxygen found, documentation generation enabled.')
+  run_target(
+    'with-docs',
+    command: ['./run.sh', meson.project_source_root() + '/docs'],
+  )
+else
+  message('Doxygen not found, documentation generation disabled.')
+endif
