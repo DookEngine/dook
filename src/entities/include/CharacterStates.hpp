@@ -5,6 +5,9 @@ namespace dook
 {
     /**
      * @brief Each character must have these states.
+     *
+     * Define which concrete dook::State objects each character's
+     * state is assigned to.
      */
     struct CharacterStates
     {
