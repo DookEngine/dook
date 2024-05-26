@@ -108,7 +108,7 @@ if doxygen.found()
   message('Doxygen found, documentation generation enabled.')
   run_target(
     'with-docs',
-    command: ['./run.sh', meson.project_source_root() + '/docs'],
+    command: ['./create_docs.sh', meson.project_source_root() + '/docs'],
   )
 else
   message('Doxygen not found, documentation generation disabled.')
