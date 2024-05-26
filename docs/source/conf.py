@@ -31,8 +31,8 @@ if read_the_docs_build:
     with open('../Doxyfile', 'r') as f:
         data = f.read()
     with open('../Doxyfile', 'w') as f:
-        f.write(data.replace('INPUT                  = ../src', 'INPUT                  = ./src'))
-    subprocess.call('doxygen Doxyfile', shell=True, cwd="../")
+        f.write(data.replace('INPUT                  = ../src', 'INPUT                  = ../../src'))
+    subprocess.call('doxygen ../Doxyfile', shell=True)
     breathe_projects['Dook'] =  '../xml'
 
 
